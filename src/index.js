@@ -35,9 +35,10 @@ async function main () {
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
-      if (err.stack !== undefined) {
+      if (err.message !== undefined) {
         resObj = { error: err.message }
       }
+      console.log(err.stack)
       res.status(err.exitCode).send(resObj)
     } catch (err) {
       console.error(err.stack)
