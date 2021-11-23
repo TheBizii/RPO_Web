@@ -1,0 +1,38 @@
+{
+  "name": "rpo_web",
+  "version": "1.0.0",
+  "description": "Bolt Node.js REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "node -v",
+    "n": "bash ~/.nvm/nvm.sh && nvm install --lts",
+    "nvm": "echo 'export NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"  # This loads nvm bash_completion\nsource /var/www/vhosts/printeepro.com/.nvm/nvm.sh' > ~/.zshrc",
+    "rc": "cat ~/.zshrc",
+    "i": "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash",
+    "help": "nvm --help",
+    "use": "nvm use 16",
+    "ls": "ls /var/www/vhosts/printeepro.com/.npm/_logs/",
+    "cat": "cat /var/www/vhosts/printeepro.com/.npm/_logs/2021-11-21T13_34_48_817Z-debug.log",
+    "rm": "rm ~/.bashrc",
+    "npm": "npm i path"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheBizii/RPO_Web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheBizii/RPO_Web/issues"
+  },
+  "homepage": "https://github.com/TheBizii/RPO_Web#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "node": "^17.1.0",
+    "path": "^0.12.7",
+    "typescript": "^4.5.2"
+  }
+}
