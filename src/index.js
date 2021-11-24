@@ -1,6 +1,7 @@
 const express = require('express')
 const http = require('http')
-// const path = require('path')
+const path = require('path')
+
 const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
 const db = require('./modules/db')
@@ -16,7 +17,7 @@ async function main () {
   app.use(cors)
   app.set('json spaces', 2)
   app.get('/', (req, res) => {
-    res.sendFile('./index.html')
+    res.sendFile(path.join(__dirname, 'index.html'))
   })
   app.get('/API', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
@@ -55,5 +56,4 @@ async function main () {
   const HOST = process.env.HOST || '127.0.0.1'
   server.listen(PORT, HOST, () => console.log(`Listening on ${HOST}:${PORT}...`))
 }
-
 main()

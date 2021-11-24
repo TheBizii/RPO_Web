@@ -25,6 +25,6 @@ const getAllCountries = async function getAllCountries () {
   return response
 }
 
-export default {
+module.exports = {
   county: getAllCountries
 }
