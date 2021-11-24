@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 10px 10px 10px 10px;
+}
+
+.div-header-container {
+  height: 7vh;
+  width: 100%;
+}
+
+.logo {
+  height: 70px;
+  width: 70px;
+  float: left;
+}
+ /*Account dropdown*/
+
+ .dropdown {
+   position: relative;
+   display: inline-block;
+   float: right;
+ }
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  left: auto;
+  right: 0;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+/*Search bar*/
+.search-container {
+  margin: auto;
+  width: 30%;
+  background: gray;
+}
+
+input[type=text] {
+  padding: 6px;
+  margin: 2px 2px 2px 2px;
+  width: 90%;
+  font-size: 17px;
+  border: none;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin: 2px 2px 2px 2px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+
+/*sidebar*/
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/*logo to footer*/
+.logo-intro {
+  max-height: 100%;
+  max-width: 100%;
+  align: left;
+}
+
+.flex-parent-intro {
+  display: flex;
+  align-items: center;
+  max-height: calc(100vh - 100px);
+}
+
+.intro-box-logo {
+  background-color: blue;
+  margin: 50px 50px 50px 50px;
+  width: 30%;
+  float: left;
+}
+
+.intro-box-moto {
+  background-color: gray;
+  margin: 50px 20px 50px 50px;
+  width: 70%;
+  float: right;
+}
+
+.flex-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  background-color: red;
+  margin: 20px 20px 20px 40px;
+  padding: 150px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}

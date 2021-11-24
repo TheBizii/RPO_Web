@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bolt</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Bolt</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="body">
-
+<body>
 <header>
   <div class="div-header-container">
     <div class="divlogo">  <img src="Pictures/Temp.jpg" alt="logo" class="logo"> </div>
@@ -22,51 +21,25 @@
     </div>
   </div>
 </header>
-
-<div class="">
-  <div class="search-container">
+<div class="search-container">
     <form action="/action_page.php">
       <input type="text" placeholder="Search.." name="search" class="search-bar">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-  </div>
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
-</div>
-
 <div id="intro" class="flex-parent-intro">
   <div class="intro-box-logo"> <img src="Pictures/Temp.jpg" alt="logo" class="logo-intro"> </div>
   <div class="intro-box-moto"> moto moto moto moto moto moto moto moto moto moto moto moto moto moto moto moto </div>
 </div>
-
 <div class="flex-parent">
   <div class="box">  </div>
   <div class="box">  </div>
   <div class="box">  </div>
   <div class="box">  </div>
 </div>
-
 <footer>
   <p>Footer</p>
 </footer>
 
 </body>
 </html>
-
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("body").style.marginLeft = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("body").style.marginLeft = "0";
-}
-</script>
