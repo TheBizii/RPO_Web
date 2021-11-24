@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
   port: config.dbPort
 })
 
-const getAllCountries = async function getAllCountries () {
+async function getAllCountries () {
   connection.connect()
 
   let response
@@ -26,5 +26,5 @@ const getAllCountries = async function getAllCountries () {
 }
 
 module.exports = {
-  county: getAllCountries
+  getAllCountries: getAllCountries
 }

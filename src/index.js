@@ -34,8 +34,10 @@ async function main () {
   })
   app.get('/API/country', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
+    const query = db.getAllCountries()
+    console.log(query)
     res.json({
-      country: db.country
+      country: query
     })
   })
   // app.use('/API/', getIndex)
