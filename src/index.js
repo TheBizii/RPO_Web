@@ -3,6 +3,7 @@ const http = require('http')
 // const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
+const db = require('./modules/db')
 
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
@@ -28,6 +29,12 @@ async function main () {
         events: process.env.CONSOLE_EVENT,
         errors: process.env.CONSOLE_ERROR
       }
+    })
+  })
+  app.get('/API/country', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.json({
+      country: db.country
     })
   })
   // app.use('/API/', getIndex)
