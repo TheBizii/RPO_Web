@@ -12,17 +12,11 @@ const connection = mysql.createConnection({
 async function getAllCountries () {
   connection.connect()
 
-  let response
-  connection.query('SELECT * FROM country', function (error, results, fields) {
-    if (error) {
-      throw error
-    }
-    console.log(results[0])
-    response = results[0]
-  })
+  const results = connection.query('SELECT * FROM country')
+  console.log('RESULTS: ' + results[0])
 
   connection.end()
-  return response
+  return results
 }
 
 module.exports = {
