@@ -17,7 +17,7 @@ async function main () {
   app.use(cors)
   app.set('json spaces', 2)
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'))
+    res.sendFile(path.join(__dirname, './layout/index.html'))
   })
   app.get('/API', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
