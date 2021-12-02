@@ -15,10 +15,8 @@ async function main () {
   app.use(bodyParser.json({ limit: '10mb' }))
   app.use(express.json())
   app.use(cors)
+  app.use(express.static(path.join(__dirname, '/layout')))
   app.set('json spaces', 2)
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './layout/index.html'))
-  })
   app.get('/API', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     res.json({
