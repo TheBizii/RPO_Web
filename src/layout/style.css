@@ -64,33 +64,13 @@ header {
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
-/*Search bar*/
-.search-container {
-  margin: auto;
-  width: 30%;
-  background: gray;
+/*Sidebar,searchbar,cart*/
+.UHbar-parent {
+  display: flex;
 }
 
-input[type=text] {
-  padding: 6px;
-  margin: 2px 2px 2px 2px;
-  width: 90%;
-  font-size: 17px;
-  border: none;
-}
-
-.search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin: 2px 2px 2px 2px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
-
-.search-container button:hover {
-  background: #ccc;
+.UHbar {
+  flex: 1;
 }
 
 /*sidebar*/
@@ -128,7 +108,41 @@ input[type=text] {
   margin-left: 50px;
 }
 
-/*logo to footer*/
+.sidebar_button {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/*Search bar*/
+.search-container {
+  margin: auto;
+  width: 30%;
+  background: gray;
+}
+
+input[type=text] {
+  padding: 6px;
+  margin: 2px 2px 2px 2px;
+  width: 90%;
+  font-size: 17px;
+  border: none;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin: 2px 2px 2px 2px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+
+/*logo*/
 .logo-intro {
   max-height: 100%;
   max-width: 100%;
@@ -138,11 +152,10 @@ input[type=text] {
 .flex-parent-intro {
   display: flex;
   align-items: center;
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 350px);
 }
 
 .intro-box-logo {
-  background-color: blue;
   margin: 50px 50px 50px 50px;
   width: 30%;
   float: left;
@@ -159,18 +172,26 @@ input[type=text] {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
+  width: 99.9%;
 }
 
+/*restaurants - ko iz baze spremeni, da bo modularno*/
 .box {
+  flex: 1;
   background-color: red;
-  margin: 20px 20px 20px 40px;
-  padding: 150px;
+  padding: 200px;
+  width: 20%;
 }
 
 /* Style the footer */
 footer {
   background-color: #777;
+  margin-top: 20px;
   padding: 10px;
   text-align: center;
   color: white;
 }
+
+
+/*cart style*/
