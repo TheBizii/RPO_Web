@@ -172,19 +172,22 @@ input[type=text] {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
+  width: 99.9%;
 }
 
 /*restaurants - ko iz baze spremeni, da bo modularno*/
 .box {
   flex: 1;
   background-color: red;
-  margin: 20px 20px 20px 20px;
-  padding: 150px;
+  padding: 200px;
+  width: 20%;
 }
 
 /* Style the footer */
 footer {
   background-color: #777;
+  margin-top: 20px;
   padding: 10px;
   text-align: center;
   color: white;
