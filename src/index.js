@@ -1,6 +1,7 @@
 const express = require('express')
 const http = require('http')
 const path = require('path')
+const fs = require('fs')
 
 const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
@@ -10,6 +11,9 @@ const db = require('./modules/db')
 // let users = require('./routes/users');
 
 async function main () {
+  const access = fs.createWriteStream('allLogs.log')
+  process.stdout.write = access.write.bind(access)
+  process.stderr.write = process.stdout.write
   const app = express()
   const server = http.createServer(app)
   app.use(bodyParser.json({ limit: '10mb' }))
@@ -17,7 +21,8 @@ async function main () {
   app.use(cors)
   app.use(express.static(path.join(__dirname, '/layout')))
   app.set('json spaces', 2)
-  app.get('/API', (req, res) => {
+  app.get('/API', async (req, res, next) => {
+    // await fs.promises.writeFile('ime.txt', 'Hello World!')
     res.setHeader('Content-Type', 'application/json')
     res.json({
       title: 'Bolt Node.JS API server',
@@ -30,12 +35,11 @@ async function main () {
       }
     })
   })
-  app.get('/API/country', (req, res) => {
+  app.get('/API/country', async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
-    const query = db.getAllCountries()
-    console.log(query)
+    const queryResult = await db.getAllCountries()
     res.json({
-      country: query
+      country: queryResult
     })
   })
   // app.use('/API/', getIndex)
