@@ -1,45 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bolt</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Bolt</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="body">
+
 <header>
   <div class="div-header-container">
-    <div class="divlogo">  <img src="Pictures/Temp.jpg" alt="logo" class="logo"> </div>
+    <div class="divlogo">  <img src="pictures/temp.jpg" alt="logo" class="logo"> </div>
     <div class="dropdown">
       <button class="dropbtn">Account</button>
       <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
+        <a href="#">Settints</a>
+        <a href="#">History</a>
+        <a href="#">Log out</a>
       </div>
     </div>
   </div>
 </header>
-<div class="search-container">
-    <form action="/action_page.php">
+
+<div class="UHbar-parent">
+  <div class="UHbar">
+      <span class="sidebar_button" onclick="openNav()">&#9776; open</span>
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Restaurants</a>
+        <a href="#">Shops</a>
+        <a href="#">Something</a>
+        <a href="#">Something</a>
+      </div>
+  </div>
+  <div class="search-container UHbar">
+    <form action="#">
       <input type="text" placeholder="Search.." name="search" class="search-bar">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
+  <div class="UHbar">
+    <div class="dropdown">
+      <button class="dropbtn">Basket</button>
+      <div class="dropdown-content">
+        <a href="#">food1</a>
+        <a href="#">food2</a>
+        <a href="#">finish order</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="intro" class="flex-parent-intro">
-  <div class="intro-box-logo"> <img src="Pictures/Temp.jpg" alt="logo" class="logo-intro"> </div>
-  <div class="intro-box-moto"> moto moto moto moto moto moto moto moto moto moto moto moto moto moto moto moto </div>
+  <div class="store-box-logo"> <img src="pictures/temp.jpg" alt="logo" class="logo-intro"> </div>
+  <div class="store-box-moto">
+    <div class="box-moto-label"> Store name </div>
+    <div class="box-moto-label"> Store location </div>
+    <div class="box-moto-label"> Work hours </div>
+    <div class="box-moto-label"> contant info (phone/email...) </div>
+    <div class="box-moto-label"> tags? </div>
+
+  </div>
 </div>
+
 <div class="flex-parent">
-  <div class="box">  </div>
-  <div class="box">  </div>
-  <div class="box">  </div>
-  <div class="box">  </div>
+  <a href="#" class="box">
+
+  </a>
+  <a href="#" class="box">
+
+  </a>
+  <a href="#" class="box">
+
+  </a>
+  <a href="#" class="box">
+
+  </a>
 </div>
+
 <footer>
   <p>Footer</p>
 </footer>
 
 </body>
 </html>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("body").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("body").style.marginLeft = "0";
+}
+</script>

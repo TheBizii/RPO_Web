@@ -1,19 +1,20 @@
 const express = require('express')
 const http = require('http')
 const path = require('path')
-const fs = require('fs')
+// const fs = require('fs')
 
 const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
 const db = require('./modules/db')
+const pstWrite = require('./modules/pstWrite')
 
+const getCountry = require('./endpoints/getCountry')
+const postLogin = require('./endpoints/postLogin')
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
 
 async function main () {
-  const access = fs.createWriteStream('allLogs.log')
-  process.stdout.write = access.write.bind(access)
-  process.stderr.write = process.stdout.write
+  pstWrite.init()
   const app = express()
   const server = http.createServer(app)
   app.use(bodyParser.json({ limit: '10mb' }))
@@ -35,15 +36,8 @@ async function main () {
       }
     })
   })
-  app.get('/API/country', async (req, res) => {
-    res.setHeader('Content-Type', 'application/json')
-    const queryResult = await db.getAllCountries()
-    res.json({
-      country: queryResult
-    })
-  })
-  // app.use('/API/', getIndex)
-  // app.use('/API/getUsers', getUsers)
+  app.use('/API/', getCountry)
+  app.use('/API/', postLogin)
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }

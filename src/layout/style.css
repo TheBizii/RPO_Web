@@ -192,6 +192,163 @@ footer {
   text-align: center;
   color: white;
 }
+/*store style*/
+.store-box-logo {
+  margin: 50px 50px 50px 50px;
+  width: 30%;
+  float: left;
+}
 
+.store-box-moto {
+  width: 70%;
+  float: right;
+}
+
+.box-moto-label {
+  background-color: gray;
+  margin-top: 5px;
+  font-size: 30px;
+}
 
 /*cart style*/
+.flex-parent-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+.cart-box-iinfo {
+  flex: 4;
+  width: 20%;
+  margin-left: 6%;
+  font-size: 25px;
+}
+
+.cart-box-uinfo {
+  background-color: rgb(217, 219, 219);
+  border: 2px solid black;
+  border-radius: 4px;
+  padding-left: 5px;
+  margin-bottom: 8px;
+}
+
+.uinfo-c {
+  display: flex;
+}
+
+.l-ci {
+  flex: 7;
+}
+
+.a-cc {
+  flex: 3;
+  text-align: right;
+  padding-right: 5px;
+
+}
+
+.uinfo-l {
+  display: flex;
+}
+
+.l-li {
+  flex: 7;
+}
+
+.a-lc {
+  flex: 3;
+  text-align: right;
+  padding-right: 5px;
+
+}
+
+.cart-box-pinfo {
+  background-color: rgb(217, 219, 219);
+  border: 2px solid black;
+  border-radius: 4px;
+  padding-left: 5px;
+  margin-bottom: 8px;
+
+}
+
+.cart-box-ginfo {
+  background-color: rgb(217, 219, 219);
+  border: 2px solid black;
+  border-radius: 4px;
+  padding-left: 5px;
+  margin-bottom: 8px;
+
+}
+
+.cart-box-items {
+  flex: 6;
+  width: 20%;
+  column-gap: 3rem;
+}
+
+.cart-box-item {
+  display: grid;
+  grid-row-gap: 2%;
+  grid-template-columns: 75% 25%;
+  width: 80%;
+  margin-left: 4%;
+  font-size: 25px;
+}
+
+.iteminfo {
+  background-color: rgb(217, 219, 219);
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin-left: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 5px 0 5px 3px;
+}
+
+.itemcost {
+  background-color: lightgray;
+  text-align: right;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 5px 3px 5px 0;
+}
+
+.cart-bc {
+  float: right;
+  margin: 5% 3% 0 0;
+}
+
+.cart-button {
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.cart-button {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+
+.cart-button:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 98%;
+  margin-left: 1%;
+  background-color: gray;
+  color: white;
+  text-align: center;
+}

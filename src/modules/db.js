@@ -11,20 +11,6 @@ async function connectToDB () {
     database: config.dbDatabase,
     port: config.dbPort
   })
-  /* connection.connect((err) => {
-    if (err) {
-      console.log('error when connecting to db:', err)
-      setTimeout(connectToDB, 10000)
-    }
-  })
-  connection.on('error', (err) => {
-    console.log('db error', err)
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      connectToDB()
-    } else {
-      throw err
-    }
-  }) */
 }
 
 async function getAllCountries () {
@@ -37,14 +23,29 @@ async function getAllCountries () {
     for (let i = 0; i < keys.length; i++) {
       res.push([keys[i], result[keys[i]]])
     }
-    console.log(JSON.stringify(res))
     connection.end()
-    return res || 'Non valid data'
+    return JSON.stringify(res) || 'Non valid data'
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function confirmLoginInformation (email, password) {
+  try {
+    const res = []
+    await connectToDB()
+    const query = await promisify(connection.query).bind(connection)
+    const result = await query(`SELECT * FROM credentials WHERE email = "${email}" AND password = "${password}" AND active = 1`)
+    if (result.length !== 1) {
+      return null
+    }
+    return JSON.stringify(res)
   } catch (err) {
     console.log(err)
   }
 }
 
 module.exports = {
-  getAllCountries: getAllCountries
+  getAllCountries,
+  confirmLoginInformation
 }
