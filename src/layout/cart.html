@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bolt</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="body">
+
+<header>
+  <div class="div-header-container">
+    <div class="divlogo">  <img src="Pictures/Temp.jpg" alt="logo" class="logo"> </div>
+    <div class="dropdown">
+      <button class="dropbtn">Account</button>
+      <div class="dropdown-content">
+        <a href="#">Settints</a>
+        <a href="#">History</a>
+        <a href="#">Log out</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="UHbar-parent">
+  <div class="UHbar">
+      <span class="sidebar_button" onclick="openNav()">&#9776; open</span>
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Restaurants</a>
+        <a href="#">Shops</a>
+        <a href="#">Something</a>
+        <a href="#">Something</a>
+      </div>
+  </div>
+  <!--<div class="UHbar">
+    <div class="dropdown">
+      <button class="dropbtn">Basket</button>
+      <div class="dropdown-content">
+        <a href="#">food1</a>
+        <a href="#">food2</a>
+        <a href="#">finish order</a>
+      </div>
+    </div>
+  </div>-->
+</div>
+
+<div class="flex-parent-cart">
+  <div class="cart-box-iinfo">
+    <div class="cart-box-uinfo">User info:
+      <div class="uinfo-n">
+        <div class="l-nf">Ime in priimek: Marcel Kumer</div>
+      </div>
+      <div class="uinfo-c">
+        <div class="l-ci">telefonska številka: 041904910</div>
+        <div class="a-cc"><a href="#">change</a></div>
+      </div>
+      <div class="uinfo-l">
+        <div class="l-li">lokacija: nekeneke</div>
+        <div class="a-lc"><a href="#">change</a></div>
+      </div>
+    </div>
+    <div class="cart-box-pinfo">
+      <form action="#">
+        <p>Način plačila:</p>
+        <input type="radio" id="pp" name="paying option" value="pp">
+        <label for="age1">PayPal</label><br>
+        <input type="radio" id="mc" name="paying option" value="mc">
+        <label for="age2">Mastercard/Visa</label><br>
+        <input type="radio" id="op" name="paying option" value="op">
+        <label for="age3">Ob prevzemu</label><br>
+        <!-- <input type="submit" value="Submit"> -->
+      </form>
+    </div>
+    <div class="cart-box-ginfo">
+      <form action="#">
+        <p>Obcija prevzema:</p>
+        <input type="radio" id="ir" name="paying option" value="pp">
+        <label for="age1">V restavraciji</label><br>
+        <input type="radio" id="dd" name="paying option" value="mc">
+        <label for="age2">Dostava na dom</label><br>
+        <!-- <input type="submit" value="Submit"> -->
+      </form>
+    </div>
+  </div>
+
+  <div class="cart-box-items">
+    <div class="cart-box-item">
+      <div class="iteminfo">Pečenka s krompirjem</div>
+      <div class="itemcost">7,99€ </div>
+    </div>
+    <div class="cart-box-item">
+      <div class="iteminfo">Dunajski zrezek</div>
+      <div class="itemcost">6,99€ </div>
+    </div>
+    <div class="cart-box-item">
+      <div class="iteminfo">Pizza margarita</div>
+      <div class="itemcost">5,99€</div>
+    </div>
+    <div class="cart-box-item">
+      <div class="iteminfo">Skupaj: </div>
+      <div class="itemcost">20.97€ </div>
+    </div>
+  </div>
+</div>
+
+<div class="cart-bc">
+  <button type="button" name="confirm" class="cart-button">Potrdi naročilo</button>
+</div>
+
+<footer class="footer">
+  <p>Footer</p>
+</footer>
+
+</body>
+</html>
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("body").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("body").style.marginLeft = "0";
+}
+</script>
