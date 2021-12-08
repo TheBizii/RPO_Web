@@ -6,9 +6,8 @@ const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
 const db = require('./modules/db')
 
-const countryOrm = require('./modules/orm/models/country');
+const Country = require('./modules/orm/models/country');
 
-let Country = countryOrm.Country;
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
 
@@ -35,13 +34,12 @@ async function main () {
       }
     })
   })
-  app.get('/ormTest', (req, res) => {    
-    let slovenia = new Country();
-    slovenia.setName("Slovenia");
-    slovenia.setCallingCode("+386");
-    slovenia.create();
+  app.get('/ormTest', async (req, res) => {    
+    /*let slovenia = new Country();
+    await slovenia.read(1);*/
+    let countries = await Country.readAll();
 
-    res.send(slovenia);
+    res.send(countries);
   });
   // app.use('/API/', getIndex)
   // app.use('/API/getUsers', getUsers)

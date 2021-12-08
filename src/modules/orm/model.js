@@ -11,7 +11,7 @@ class Model {
     throw new Error("Method create() must be implemented.");
   }
 
-  async read() {
+  static async read() {
     throw new Error("Method read() must be implemented.");
   }
 
@@ -23,12 +23,22 @@ class Model {
     throw new Error("Method del() must be implemented.");
   }
 
+  setID(ID) {
+    this.ID = ID;
+  }
+
   getID() {
     return this.ID;
   }
 
   setActive(active) {
-    this.active = active;
+    if(active === true) {
+      this.active = 1;
+    } else if(active === false) {
+      this.active = 0;
+    } else if(active === 0 || active === 1) {
+      this.active = active
+    }
   }
 
   getActive() {

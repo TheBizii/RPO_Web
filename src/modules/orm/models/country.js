@@ -33,24 +33,65 @@ class Country extends Model {
   }
 
   async create() {
-    try {
+    /*try {
       let sql = `INSERT INTO country (name, calling_code, alpha3_code, active) VALUES (${ this.getName() }, ${ this.getCallingCode() }, ${ this.getAlpha3Code() }, 1);`;
       const res = [];
       await db.connectToDB();
       
+    }*/
+  }
+
+  async read(id) {
+    try {
+      let sql = `SELECT * FROM country WHERE ID = ${ id } AND active <> 0;`;
+      let res = await db.query(sql);
+      if(res.length > 0) {
+        let country = res[0];
+        this.ID = country.ID;
+        this.setName(country.name);
+        this.setCallingCode(country.calling_code);
+        this.setAlpha3Code(country.alpha3_code);
+        this.setActive(country.active);
+        return this;
+      }
+    } catch(err) {
+      console.log(err);
+    }
+
+    return null;
+  }
+
+  static async readAll() {
+    try {
+      let sql = `SELECT ID FROM country WHERE active <> 0`;
+      let res = await db.query(sql); 
+      let countries = [];
+      for(let i = 0; i < res.length; i++) {
+        let country = new Country();
+        await country.read(res[i].ID);
+        countries.push(country);
+      }
+      return countries;
+    } catch(err) {
+      console.log(err);
+    }
+
+    return null;
+  }
+
+  async update() {
+    try {
+      let sql = `UPDATE country SET name="${ this.getName() }", calling_code="${ this.getCallingCode() }", alpha3_code="${ this.getAlpha3Code() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
+      let res = await db.query(sql);
+      return JSON.stringify(res);
+    } catch(err) {
+      console.log(err);
     }
   }
 
-  read() {
-
-  }
-
-  update() {
-
-  }
-
-  del() {
-
+  async del() {
+    this.setActive(false);
+    await this.update();
   }
 }
 

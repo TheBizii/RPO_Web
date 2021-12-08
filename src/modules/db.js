@@ -56,11 +56,23 @@ async function getAllShops () {
     return JSON.stringify(result)
   } catch (err) {
     console.log(err)
+
+async function query(qry) {
+  try {
+    const res = [];
+    await connectToDB();
+    const query = await promisify(connection.query).bind(connection);
+    const result = await query(qry);
+    
+    return result;
+  } catch(err) {
+    console.log(err);
   }
 }
 
 module.exports = {
   getAllCountries,
   confirmLoginInformation,
-  getAllShops
+  getAllShops,
+  query
 }
