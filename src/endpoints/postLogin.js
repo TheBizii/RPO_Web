@@ -4,13 +4,7 @@ const db = require('../modules/db')
 
 router.post('/login', async function (req, res) {
   res.setHeader('Content-Type', 'application/json')
-  if (req.body.email === undefined) {
-    res.json({
-      error: 'Something went wrong with login'
-    })
-    return
-  }
-  if (req.body.password === undefined) {
+  if (req.body.email === undefined && req.body.password === undefined) {
     res.json({
       error: 'Something went wrong with login'
     })
