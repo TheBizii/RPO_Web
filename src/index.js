@@ -8,7 +8,8 @@ const cors = require('./modules/cors')
 const db = require('./modules/db')
 const pstWrite = require('./modules/pstWrite')
 
-const getCountries = require('./endpoints/getCountries')
+const getCountry = require('./endpoints/getCountry')
+const postLogin = require('./endpoints/postLogin')
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
 
@@ -35,7 +36,8 @@ async function main () {
       }
     })
   })
-  app.use('/API/', getCountries)
+  app.use('/API/', getCountry)
+  app.use('/API/', postLogin)
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
