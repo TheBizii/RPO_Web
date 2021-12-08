@@ -8,7 +8,7 @@ const cors = require('./modules/cors')
 const pstWrite = require('./modules/pstWrite')
 
 const getCountry = require('./endpoints/getCountry')
-const getNearbyShops = require('./endpoints/getCountry')
+const postNearbyShops = require('./endpoints/postNearbyShops')
 const postLogin = require('./endpoints/postLogin')
 const postRegister = require('./endpoints/postRegister')
 
@@ -36,9 +36,9 @@ async function main () {
     })
   })
   app.use('/API/', getCountry)
-  app.use('/API/', getNearbyShops)
   app.use('/API/', postLogin)
   app.use('/API/', postRegister)
+  app.use('/API/', postNearbyShops)
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
