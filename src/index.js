@@ -10,6 +10,7 @@ const pstWrite = require('./modules/pstWrite')
 
 const getCountry = require('./endpoints/getCountry')
 const postLogin = require('./endpoints/postLogin')
+const postRegister = require('./endpoints/postRegister')
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
 
@@ -38,6 +39,7 @@ async function main () {
   })
   app.use('/API/', getCountry)
   app.use('/API/', postLogin)
+  app.use('/API/', postRegister)
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
