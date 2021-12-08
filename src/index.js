@@ -1,19 +1,18 @@
 const express = require('express')
 const http = require('http')
 const path = require('path')
-const fs = require('fs')
+// const fs = require('fs')
 
 const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
 const db = require('./modules/db')
+const pstWrite = require('./modules/pstWrite')
 
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
 
 async function main () {
-  const access = fs.createWriteStream('allLogs.log')
-  process.stdout.write = access.write.bind(access)
-  process.stderr.write = process.stdout.write
+  pstWrite.init()
   const app = express()
   const server = http.createServer(app)
   app.use(bodyParser.json({ limit: '10mb' }))
