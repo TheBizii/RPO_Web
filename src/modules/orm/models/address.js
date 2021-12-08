@@ -30,6 +30,4 @@ class Address extends Model {
   }
 }
 
-module.exports = {
-  Address: Address
-}
+module.exports = Address;

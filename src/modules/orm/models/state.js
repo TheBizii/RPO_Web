@@ -16,6 +16,4 @@ class State extends Model {
   }
 }
 
-module.exports = {
-  State: State
-}
+module.exports = State;

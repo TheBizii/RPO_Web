@@ -32,6 +32,4 @@ class Currency extends Model {
   }
 }
 
-module.exports = {
-  Currency: Currency
-}
+module.exports = Currency;

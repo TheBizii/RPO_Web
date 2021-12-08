@@ -36,6 +36,4 @@ class Category extends Model {
   }
 }
 
-module.exports = {
-  Category: Category
-}
+module.exports = Category;

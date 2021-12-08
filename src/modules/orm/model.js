@@ -7,19 +7,19 @@ class Model {
     }
   }
 
-  create() {
+  async create() {
     throw new Error("Method create() must be implemented.");
   }
 
-  read() {
+  async read() {
     throw new Error("Method read() must be implemented.");
   }
 
-  update() {
+  async update() {
     throw new Error("Method update() must be implemented.");
   }
 
-  del() {
+  async del() {
     throw new Error("Method del() must be implemented.");
   }
 

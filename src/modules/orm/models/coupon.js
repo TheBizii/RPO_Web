@@ -92,6 +92,4 @@ class Coupon extends Model {
   }
 }
 
-module.exports = {
-  Coupon: Coupon
-}
+module.exports = Coupon;

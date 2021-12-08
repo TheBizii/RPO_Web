@@ -1,3 +1,4 @@
+const db = require('../../db');
 const model = require('../model');
 
 const Model = model.Model;
@@ -30,8 +31,27 @@ class Country extends Model {
   getAlpha3Code() {
     return this.alpha3Code;
   }
+
+  async create() {
+    try {
+      let sql = `INSERT INTO country (name, calling_code, alpha3_code, active) VALUES (${ this.getName() }, ${ this.getCallingCode() }, ${ this.getAlpha3Code() }, 1);`;
+      const res = [];
+      await db.connectToDB();
+      
+    }
+  }
+
+  read() {
+
+  }
+
+  update() {
+
+  }
+
+  del() {
+
+  }
 }
 
-module.exports = {
-  Country: Country
-}
+module.exports = Country;

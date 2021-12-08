@@ -60,6 +60,4 @@ class Goods extends Model {
   }
 }
 
-module.exports = {
-  Goods: Goods
-}
+module.exports = Goods;

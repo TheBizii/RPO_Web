@@ -29,6 +29,4 @@ class Credentials extends Model {
   }
 }
 
-module.exports = {
-  Credentials: Credentials
-}
+module.exports = Credentials;
