@@ -1,9 +1,11 @@
 const express = require('express')
+const nodeGeo = require('node-geocoder')
+const db = require('../modules/db')
 const router = express.Router()
-const nodeGeo = require('node-geocoder');
 const params = {
   provider: 'openstreetmap'
 }
+const geoCoder = nodeGeo(params)
 // const db = require('../modules/db')
 
 // <a href="https://my-location.org/?lat=46.5554&lng=15.6465" target="_blank">(46.5554,15.6465)</a>
@@ -15,24 +17,23 @@ router.post('/nearbyShops', async function (req, res) {
     })
     return
   }
-  // const queryResult = await db.confirmLoginInformation(req.body.email, req.body.password)
-  // if (queryResult != null) {
-  const geoCoder = nodeGeo(params)
-  geoCoder.geocode('Luray Caverns')
-    .then((res)=> {
-      console.log(res);
+  const queryResult = await db.getAllShops()
+  if (queryResult != null) {
+    const result = JSON.parse(queryResult)
+    const keys = Object.keys(result)
+    const resArr = []
+    for (let i = 0; i < keys.length; i++) {
+      const retObj = await geoCoder.geocode(result[keys[i]].address)
+      resArr.push({ lat: retObj[0].latitude, lon: retObj[0].longitude, dis: Math.abs(retObj[0].latitude - req.body.lat) + Math.abs(retObj[0].longitude - req.body.lng) })
+    }
+    res.json({
+      shops: resArr
     })
-    .catch((err)=> {
-      console.log(err);
-    });
-  res.json({
-    message: 'OK'
-  })
-  // } else {
-  //  res.json({
-  //    error: 'Something went wrong with login'
-  //  })
-  // }
+  } else {
+    res.json({
+      error: 'Something went wrong with '
+    })
+  }
 })
 
 module.exports = router

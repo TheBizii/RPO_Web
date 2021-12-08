@@ -45,7 +45,22 @@ async function confirmLoginInformation (email, password) {
   }
 }
 
+async function getAllShops () {
+  try {
+    await connectToDB()
+    const query = await promisify(connection.query).bind(connection)
+    const result = await query('SELECT a.address FROM user_role ur JOIN user u ON ur.user_id = u.ID JOIN customer_address ca ON ca.user_id = u.ID JOIN address a ON a.ID = ca.address_id WHERE ur.role_id = 3 AND u.active = 1')
+    if (result.length !== 1) {
+      return null
+    }
+    return JSON.stringify(result)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 module.exports = {
   getAllCountries,
-  confirmLoginInformation
+  confirmLoginInformation,
+  getAllShops
 }
