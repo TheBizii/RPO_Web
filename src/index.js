@@ -8,6 +8,7 @@ const cors = require('./modules/cors')
 const db = require('./modules/db')
 const pstWrite = require('./modules/pstWrite')
 
+const getCountries = require('./endpoints/getCountries')
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
 
@@ -34,15 +35,7 @@ async function main () {
       }
     })
   })
-  app.get('/API/country', async (req, res) => {
-    res.setHeader('Content-Type', 'application/json')
-    const queryResult = await db.getAllCountries()
-    res.json({
-      country: queryResult
-    })
-  })
-  // app.use('/API/', getIndex)
-  // app.use('/API/getUsers', getUsers)
+  app.use('/API/', getCountries)
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
