@@ -37,6 +37,11 @@ async function main () {
   app.get('/ormTest', async (req, res) => {    
     /*let slovenia = new Country();
     await slovenia.read(1);*/
+    let montenegro = new Country();
+    montenegro.setName("Montenegro");
+    montenegro.setCallingCode("+382");
+    montenegro.setAlpha3Code("MNE");    
+    await montenegro.create();
     let countries = await Country.readAll();
 
     res.send(countries);

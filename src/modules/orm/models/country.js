@@ -33,12 +33,16 @@ class Country extends Model {
   }
 
   async create() {
-    /*try {
-      let sql = `INSERT INTO country (name, calling_code, alpha3_code, active) VALUES (${ this.getName() }, ${ this.getCallingCode() }, ${ this.getAlpha3Code() }, 1);`;
-      const res = [];
-      await db.connectToDB();
-      
-    }*/
+    try {
+      this.setActive(true); 
+      let sql = `INSERT INTO country (name, calling_code, alpha3_code, active) VALUES ("${ this.getName() }", "${ this.getCallingCode() }", "${ this.getAlpha3Code() }", 1);`;
+      let res = await db.query(sql);
+      this.setID(res.insertId);
+      return res;
+    } catch(err) {
+      console.log(err);
+    }
+    return null;
   }
 
   async read(id) {
