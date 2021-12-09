@@ -49,7 +49,7 @@ async function getAllShops () {
   try {
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
-    const result = await query('SELECT a.address FROM user_role ur JOIN user u ON ur.user_id = u.ID JOIN customer_address ca ON ca.user_id = u.ID JOIN address a ON a.ID = ca.address_id WHERE ur.role_id = 3 AND u.active = 1')
+    const result = await query('SELECT a.address, pl.title FROM address a JOIN partner_location pl ON pl.address_id = a.ID')
     if (result.length !== 1) {
       return null
     }

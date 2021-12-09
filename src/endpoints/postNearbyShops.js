@@ -24,7 +24,7 @@ router.post('/nearbyShops', async function (req, res) {
     const resArr = []
     for (let i = 0; i < keys.length; i++) {
       const retObj = await geoCoder.geocode(result[keys[i]].address)
-      resArr.push({ lat: retObj[0].latitude, lon: retObj[0].longitude, dis: Math.abs(retObj[0].latitude - req.body.lat) + Math.abs(retObj[0].longitude - req.body.lng) })
+      resArr.push({ lat: retObj[0].latitude, lon: retObj[0].longitude, dis: Math.abs(retObj[0].latitude - req.body.lat) + Math.abs(retObj[0].longitude - req.body.lng), name: result[keys[i]].title })
     }
     res.json({
       shops: resArr

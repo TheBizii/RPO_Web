@@ -388,7 +388,11 @@ VALUES
 	('Poštna ulica 10', 1),
 	('Loška ulica 10', 1),
 	('Ulica Pohorskega bataljona 14', 1),
-	('Tržaška ulica 6', 1);
+	('Tržaška ulica 6', 1),
+	('Pobreška cesta 18', 1),
+	('Ptujska cesta 106', 1),
+	('Na polju 24', 1),
+	('Čopova ulica 14', 11);
 
 
 INSERT INTO
@@ -497,7 +501,11 @@ VALUES
 	(13, 1, 'McDonald\'s Swaty'),
 	(10, 2, 'Patrick\'s Pub'),
 	(11, 3, 'Kitajska Restavracija Zvezda'),
-	(12, 4, 'Kitajska Restavracija Zlata Srna');
+	(12, 4, 'Kitajska Restavracija Zlata Srna'),
+	(14, 1, 'McDonald\'s Europark'),
+	(15, 1, 'McDonald\'s Ptujska'),
+	(16, 1, 'McDonald\'s Petrol'),
+	(17, 1, 'McDonald\'s Čopova');
 
 INSERT INTO
 	partner_location_goods (goods_id, partner_location_id, active)
