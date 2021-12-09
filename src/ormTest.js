@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
 const db = require('./modules/db')
 
-const Country = require('./modules/orm/models/country');
+const User = require('./modules/orm/models/user');
 
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
@@ -35,16 +35,9 @@ async function main () {
     })
   })
   app.get('/ormTest', async (req, res) => {    
-    /*let slovenia = new Country();
-    await slovenia.read(1);*/
-    let montenegro = new Country();
-    montenegro.setName("Montenegro");
-    montenegro.setCallingCode("+382");
-    montenegro.setAlpha3Code("MNE");    
-    await montenegro.create();
-    let countries = await Country.readAll();
+    let users = await User.readAll();
 
-    res.send(countries);
+    res.send(users);
   });
   // app.use('/API/', getIndex)
   // app.use('/API/getUsers', getUsers)
