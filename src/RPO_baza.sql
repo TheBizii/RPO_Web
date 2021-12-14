@@ -90,6 +90,7 @@ CREATE TABLE `address`
  `address` varchar(45) NOT NULL ,
  `post_id` integer NOT NULL ,
  `ID`      integer NOT NULL AUTO_INCREMENT ,
+ `active`     tinyint NOT NULL ,
 
 PRIMARY KEY (`ID`),
 KEY `fkIdx_147` (`post_id`),
@@ -164,6 +165,7 @@ CREATE TABLE `customer_address`
  `ID`         integer NOT NULL AUTO_INCREMENT ,
  `address_id` integer NOT NULL ,
  `user_id`    integer NOT NULL ,
+ `active`     tinyint NOT NULL ,
 
 PRIMARY KEY (`ID`),
 KEY `fkIdx_162` (`address_id`),
@@ -242,6 +244,7 @@ CREATE TABLE `partner`
  `office_address_id` integer NOT NULL ,
  `iban`              varchar(40) NOT NULL ,
  `ID`                integer NOT NULL AUTO_INCREMENT ,
+ `active`     tinyint NOT NULL ,
 
 PRIMARY KEY (`ID`),
 KEY `fkIdx_192` (`office_address_id`),
@@ -254,6 +257,7 @@ CREATE TABLE `partner_location`
  `partner_id` integer NOT NULL ,
  `title`      varchar(45) NOT NULL ,
  `ID`         integer NOT NULL AUTO_INCREMENT ,
+ `active`     tinyint NOT NULL ,
 
 PRIMARY KEY (`ID`),
 KEY `fkIdx_186` (`address_id`),

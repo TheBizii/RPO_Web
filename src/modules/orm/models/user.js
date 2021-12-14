@@ -1,5 +1,6 @@
 const db = require('../../db');
 const model = require('../model');
+const Credentials = require('../credentials');
 
 const Model = model.Model;
 
@@ -22,6 +23,14 @@ class User extends Model {
 
   setPhone(phone) {
     this.phone = phone;
+  }
+
+  setCredentials(credentials) {
+    if(credentials.constructor === Credentials) {
+      this.credentials = credentials;
+    } else {
+      throw new Error(`Got ${credentials.constructor}, expected object of type Credentials.`);
+    }
   }
 
   // TODO: addAddress, removeAddress
@@ -50,7 +59,7 @@ class User extends Model {
   async create() {
     try {
       this.setActive(true); 
-      let sql = `INSERT INTO user (first_name, middle_name, last_name, phone, active) VALUES ("${ this.getFirstName() }", "${ this.getMiddleName() }", "${ this.getLastName() }", "${ this.getPhone() }", 1);`;
+      let sql = `INSERT INTO user (first_name, middle_name, last_name, phone, credentials_id, active) VALUES ("${ this.getFirstName() }", "${ this.getMiddleName() }", "${ this.getLastName() }", "${ this.getPhone() }", "${ this.getCredentials().getID() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
       return res;
@@ -66,12 +75,15 @@ class User extends Model {
       let res = await db.query(sql);
       if(res.length > 0) {
         let user = res[0];
+        let credentials = new Credentials();
+        await credentials.read(user.credentials_id);
         this.setID(user.ID);
         this.setFirstName(user.first_name);
         this.setMiddleName(user.middle_name);
         this.setLastName(user.last_name);
         this.setPhone(user.phone);
         // TODO: Load addresses
+        this.setCredentials(credentials);
         this.setActive(user.active);
         return this;
       }
@@ -102,7 +114,7 @@ class User extends Model {
 
   async update() {
     try {
-      let sql = `UPDATE user SET first_name="${ this.getFirstName() }", middle_name="${ this.getMiddleName() }", last_name="${ this.getLastName() }", phone="${ this.getPhone() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
+      let sql = `UPDATE user SET first_name="${ this.getFirstName() }", middle_name="${ this.getMiddleName() }", last_name="${ this.getLastName() }", phone="${ this.getPhone() }", credentials_id="${ this.getCredentials().getID() }" active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
