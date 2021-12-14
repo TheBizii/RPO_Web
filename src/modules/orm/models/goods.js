@@ -1,8 +1,8 @@
+const db = require('../../db');
 const model = require('../model');
-const currency = require('currency');
+const Currency = require('./currency');
 
 const Model = model.Model;
-const Currency = currency.Currency;
 
 class Goods extends Model {
   constructor() {
@@ -55,8 +55,78 @@ class Goods extends Model {
     return this.imageUrl;
   }
 
-  getCategories() {
+  /*getCategories() {
     return this.categories;
+  }*/
+
+  async create() {
+    try {
+      this.setActive(true);
+      let sql = `INSERT INTO goods (name, currency_id, price, description, image_url, active) VALUES ("${ this.getName() }", "${ this.getCurrency().getID() }", "${ this.getPrice() }", "${ this.getDescription() }", "${ this.getImageUrl() }", 1);`;
+      let res = await db.query(sql);
+      this.setID(res.insertId);
+      return res;
+    } catch(err) {
+      console.log(err);
+    }
+    return null;
+  }
+
+  async read(id) {
+    try {
+      let sql = `SELECT * FROM goods WHERE ID = ${ id } AND active <> 0;`;
+      let res = await db.query(sql);
+      if(res.length > 0) {
+        let goods = res[0];
+        let currency = new Currency();
+        await currency.read(goods.currency_id);
+        this.setID(goods.ID);
+        this.setName(goods.name);
+        this.setCurrency(currency);
+        this.setPrice(goods.price);
+        this.setDescription(goods.description);
+        this.setImageUrl(goods.image_url);
+        this.setActive(goods.active);
+        return this;
+      }
+    } catch(err) {
+      console.log(err);
+    }
+
+    return null;
+  }
+
+  static async readAll() {
+    try {
+      let sql = `SELECT ID FROM goods WHERE active <> 0`;
+      let res = await db.query(sql);
+      let allGoods = [];
+      for(let i = 0; i < res.length; i++) {
+        let goods = new Goods();
+        await goods.read(res[i].ID);
+        allGoods.push(goods);
+      }
+      return allGoods;
+    } catch(err) {
+      console.log(err);
+    }
+
+    return null;
+  }
+
+  async update() {
+    try {
+      let sql = `UPDATE goods SET name="${ this.getName() }", currency_id="${ this.getCurrency().getID() }", price="${ this.getPrice() }", description="${ this.getDescription() }" image_url="${ this.getImageUrl() }" active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
+      let res = await db.query(sql);
+      return JSON.stringify(res);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  async del() {
+    this.setActive(false);
+    await this.update();
   }
 }
 

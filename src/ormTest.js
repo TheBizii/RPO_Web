@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const cors = require('./modules/cors')
 const db = require('./modules/db')
 
-const User = require('./modules/orm/models/user');
+const Post = require('./modules/orm/models/post');
 
 // let routes = require('./routes/index');
 // let users = require('./routes/users');
@@ -35,9 +35,9 @@ async function main () {
     })
   })
   app.get('/ormTest', async (req, res) => {    
-    let users = await User.readAll();
+    let posts = await Post.readAll();
 
-    res.send(users);
+    res.send(posts);
   });
   // app.use('/API/', getIndex)
   // app.use('/API/getUsers', getUsers)
