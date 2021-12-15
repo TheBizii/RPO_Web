@@ -6,14 +6,13 @@ const params = {
   provider: 'openstreetmap'
 }
 const geoCoder = nodeGeo(params)
-// const db = require('../modules/db')
 
 // <a href="https://my-location.org/?lat=46.5554&lng=15.6465" target="_blank">(46.5554,15.6465)</a>
 router.post('/nearbyShops', async function (req, res) {
   res.setHeader('Content-Type', 'application/json')
   if (req.body.lat === undefined && req.body.lng === undefined) {
     res.json({
-      error: 'Something went wrong with location'
+      error: 'Something went wrong with nearbyShops'
     })
     return
   }
@@ -24,6 +23,7 @@ router.post('/nearbyShops', async function (req, res) {
     const resArr = []
     for (let i = 0; i < keys.length; i++) {
       const retObj = await geoCoder.geocode(result[keys[i]].address)
+      console.log(result[keys[i]])
       resArr.push({ lat: retObj[0].latitude, lon: retObj[0].longitude, dis: Math.abs(retObj[0].latitude - req.body.lat) + Math.abs(retObj[0].longitude - req.body.lng), name: result[keys[i]].title })
     }
     res.json({
@@ -31,7 +31,7 @@ router.post('/nearbyShops', async function (req, res) {
     })
   } else {
     res.json({
-      error: 'Something went wrong with '
+      error: 'Something went wrong with nearbyShops'
     })
   }
 })
