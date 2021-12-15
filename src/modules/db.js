@@ -36,7 +36,7 @@ async function confirmLoginInformation (email, password) {
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
     const result = await query(`SELECT * FROM credentials WHERE email = "${email}" AND password = "${password}" AND active = 1`)
-    if (result.length !== 1) {
+    if (result.length === 0) {
       return null
     }
     return JSON.stringify(res)
@@ -49,8 +49,8 @@ async function getAllShops () {
   try {
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
-    const result = await query('SELECT a.address, pl.title FROM address a JOIN partner_location pl ON pl.address_id = a.ID')
-    if (result.length !== 1) {
+    const result = await query('SELECT a.address, a.coordinate, pl.title FROM address a JOIN partner_location pl ON pl.address_id = a.ID')
+    if (result.length === 0) {
       return null
     }
     return JSON.stringify(result)

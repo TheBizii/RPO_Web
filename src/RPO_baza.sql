@@ -102,6 +102,7 @@ CONSTRAINT `FK_134` FOREIGN KEY `fkIdx_136` (`country_id`) REFERENCES `country` 
 CREATE TABLE `address`
 (
  `address` varchar(45) NOT NULL ,
+ `coordinate` POINT,
  `post_id` integer NOT NULL ,
  `ID`      integer NOT NULL AUTO_INCREMENT ,
  `active`     tinyint NOT NULL ,
@@ -390,25 +391,25 @@ VALUES
 	('Ljubljana', 1, 1);
 
 INSERT INTO
-	address (address, post_id, active)
+	address (address, coordinate, post_id, active)
 VALUES
-	('Koreno 78', 1, 1),
-	('Kolodvorska ulica 178', 1, 1),
-	('Via Malpaga 2', 3, 1),
-	('Spodnja Velka 22', 1, 1),
-	('Cesta na Stolp 140', 1, 1),
-	('Martinje 2', 1, 1),
-	('Pot na Lavo 22', 1, 1),
-	('Gosposvetska cesta 81', 1, 1),
-	('Dunajska cesta 151', 11, 1),
-	('Poštna ulica 10', 1, 1),
-	('Loška ulica 10', 1, 1),
-	('Ulica Pohorskega bataljona 14', 1, 1),
-	('Tržaška ulica 6', 1, 1),
-	('Pobreška cesta 18', 1, 1),
-	('Ptujska cesta 106', 1, 1),
-	('Na polju 24', 1, 1),
-	('Čopova ulica 14', 11, 1);
+	('Koreno 78', NULL, 1, 1),
+	('Kolodvorska ulica 178', NULL, 1, 1),
+	('Via Malpaga 2', NULL, 3, 1),
+	('Spodnja Velka 22', NULL, 1, 1),
+	('Cesta na Stolp 140', NULL, 1, 1),
+	('Martinje 2', NULL, 1, 1),
+	('Pot na Lavo 22', NULL, 1, 1),
+	('Gosposvetska cesta 81', NULL, 1, 1),
+	('Dunajska cesta 151', NULL, 11, 1),
+	('Poštna ulica 10', NULL, 1, 1),
+	('Loška ulica 10', NULL, 1, 1),
+	('Ulica Pohorskega bataljona 14', NULL, 1, 1),
+	('Tržaška ulica 6', NULL, 1, 1),
+	('Pobreška cesta 18', NULL, 1, 1),
+	('Ptujska cesta 106', POINT(46.53355615, 15.699469250830932),1, 1),
+	('Na polju 24', NULL, 1, 1),
+	('Čopova ulica 14', NULL, 11, 1);
 
 
 INSERT INTO
