@@ -8,13 +8,13 @@ DROP TABLE IF EXISTS `order_state`;
 DROP TABLE IF EXISTS `order`;
 DROP TABLE IF EXISTS `goods_category`;
 DROP TABLE IF EXISTS `customer_address`;
-DROP TABLE IF EXISTS `credentials`;
 DROP TABLE IF EXISTS `coupon`;
 DROP TABLE IF EXISTS `goods`;
 DROP TABLE IF EXISTS `category`;
 DROP TABLE IF EXISTS `address`;
 DROP TABLE IF EXISTS `post`;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `credentials`;
 DROP TABLE IF EXISTS `state`;
 DROP TABLE IF EXISTS `role`;
 DROP TABLE IF EXISTS `currency`;
@@ -69,7 +69,7 @@ CREATE TABLE `credentials`
  `salt`     char(32) NOT NULL ,
  `active`   tinyint NOT NULL ,
 
-PRIMARY KEY (`ID`),
+PRIMARY KEY (`ID`)
 );
 
 CREATE TABLE `user`
@@ -350,16 +350,16 @@ VALUES
 	('Finished', 1);
 
 INSERT INTO
-	`user` (first_name, middle_name, last_name, phone, active)
+	`user` (first_name, middle_name, last_name, phone, credentials_id, active)
 VALUES
-	('Tomaž', NULL, 'Bizjak', '+38664123456', 1),
-	('Tim', NULL, 'Vehovar', '+38664234567', 1),
-	('Marcel', NULL, 'Kumer', '+38664345678', 1),
-	('Aleksander', NULL, 'Grobelnik', '+38664456789', 1),
-	('Judita', 'Doris', 'Calvin', '+38664000000', 1),
-	('Lorena', NULL, 'Wang', '+38664111111', 1),
-	('Martin', NULL, 'Bret', '+38664222222', 1),
-	('Tatjana', 'Mertens', 'Clayton', '+38664333333', 1);
+	('Tomaž', NULL, 'Bizjak', '+38664123456', 1, 1),
+	('Tim', NULL, 'Vehovar', '+38664234567', 2, 1),
+	('Marcel', NULL, 'Kumer', '+38664345678', 3, 1),
+	('Aleksander', NULL, 'Grobelnik', '+38664456789', 4, 1),
+	('Judita', 'Doris', 'Calvin', '+38664000000', 5, 1),
+	('Lorena', NULL, 'Wang', '+38664111111', 6, 1),
+	('Martin', NULL, 'Bret', '+38664222222', 7, 1),
+	('Tatjana', 'Mertens', 'Clayton', '+38664333333', 8, 1);
 
 INSERT INTO
 	post (city_name, country_id, active)
@@ -377,25 +377,25 @@ VALUES
 	('Ljubljana', 1, 1);
 
 INSERT INTO
-	address (address, post_id)
+	address (address, post_id, active)
 VALUES
-	('Koreno 78', 1),
-	('Kolodvorska ulica 178', 1),
-	('Via Malpaga 2', 3),
-	('Spodnja Velka 22', 1),
-	('Cesta na Stolp 140', 1),
-	('Martinje 2', 1),
-	('Pot na Lavo 22', 1),
-	('Gosposvetska cesta 81', 1),
-	('Dunajska cesta 151', 11),
-	('Poštna ulica 10', 1),
-	('Loška ulica 10', 1),
-	('Ulica Pohorskega bataljona 14', 1),
-	('Tržaška ulica 6', 1),
-	('Pobreška cesta 18', 1),
-	('Ptujska cesta 106', 1),
-	('Na polju 24', 1),
-	('Čopova ulica 14', 11);
+	('Koreno 78', 1, 1),
+	('Kolodvorska ulica 178', 1, 1),
+	('Via Malpaga 2', 3, 1),
+	('Spodnja Velka 22', 1, 1),
+	('Cesta na Stolp 140', 1, 1),
+	('Martinje 2', 1, 1),
+	('Pot na Lavo 22', 1, 1),
+	('Gosposvetska cesta 81', 1, 1),
+	('Dunajska cesta 151', 11, 1),
+	('Poštna ulica 10', 1, 1),
+	('Loška ulica 10', 1, 1),
+	('Ulica Pohorskega bataljona 14', 1, 1),
+	('Tržaška ulica 6', 1, 1),
+	('Pobreška cesta 18', 1, 1),
+	('Ptujska cesta 106', 1, 1),
+	('Na polju 24', 1, 1),
+	('Čopova ulica 14', 11, 1);
 
 
 INSERT INTO
@@ -428,28 +428,28 @@ VALUES
 	('Brezplačna poštnina', NULL, NULL, 'Brezplačna poštnina', 100.00, CURDATE(), '2022-12-31 23:59:59', 1, 'FREESHIP', 1);
 
 INSERT INTO
-	credentials (email, user_id, password, salt, active)
+	credentials (email, password, salt, active)
 VALUES
-	('TheBizii', 1, 'B2D8C3D739D5EDC4259811AA3BB290131DB0812A747CD7B0B22D7B2BC874B877', 'R=g*AksavvrdN9xUoU?-NpofJ7-y@trE', 1),
-	('VehoTim', 2, '4557BA1BC41BA578D27C8A37F37B2A5A479203BEF156E58CC9CB2EDA2A58A34E', '3ld@js/h@xWoF/v)Ek._?tpLnV.nkOqW', 1),
-	('blueflamed', 3, '075E5681B25F2675570CA6EF358826344FCECE97FB97E54ECF517BC07D48FEE6', '80Tv51VW#B70EM!2d3Iz-BvPnIp8/6E)', 1),
-	('profek10', 4, 'FEFF8B2BDF4629CB4AF7FCA02C66206A3DD0CBE4DF8295AF5D8AED0FDA5BDF73', 'cZVAplgY.hw5@DY*#.hcak4u41b@Hg:@', 1),
-	('judcal', 5, '7EA047EFDF158389F6937A281F7D242124BDF487E7AE1628E96241281268D1CD', ')cvXbkn:yMzd*L2QI(3pWZ?Xg6BSXk@F', 1),
-	('lorwan', 6, 'B961152839C3E6FA2A32A91A73CC7AAF316CCEDC52A554EFAD1B2ACC01FB36B7', 'jOAQU5AhCtCQcbe9BrBp+51FlyqbY0yT', 1),
-	('marbre', 7, '39F0F82EA31E72DB16CE63193E94A5EAFB56214B41A20393CC7F773E5491F8B4', 'yxVPux1fg)9mZG!nW4Nyp02v90EF/!:j', 1),
-	('tatmer', 8, '367111A4ED05280B4AF574017E454B0BCD4BD1DDCFE3BA990FA5634B3AD17C75', '#=Pt-Qt*ff9aIsDn(H1Hd)R(cfdA:2Pr', 1);
+	('TheBizii', 'B2D8C3D739D5EDC4259811AA3BB290131DB0812A747CD7B0B22D7B2BC874B877', 'R=g*AksavvrdN9xUoU?-NpofJ7-y@trE', 1),
+	('VehoTim', '4557BA1BC41BA578D27C8A37F37B2A5A479203BEF156E58CC9CB2EDA2A58A34E', '3ld@js/h@xWoF/v)Ek._?tpLnV.nkOqW', 1),
+	('blueflamed', '075E5681B25F2675570CA6EF358826344FCECE97FB97E54ECF517BC07D48FEE6', '80Tv51VW#B70EM!2d3Iz-BvPnIp8/6E)', 1),
+	('profek10', 'FEFF8B2BDF4629CB4AF7FCA02C66206A3DD0CBE4DF8295AF5D8AED0FDA5BDF73', 'cZVAplgY.hw5@DY*#.hcak4u41b@Hg:@', 1),
+	('judcal', '7EA047EFDF158389F6937A281F7D242124BDF487E7AE1628E96241281268D1CD', ')cvXbkn:yMzd*L2QI(3pWZ?Xg6BSXk@F', 1),
+	('lorwan', 'B961152839C3E6FA2A32A91A73CC7AAF316CCEDC52A554EFAD1B2ACC01FB36B7', 'jOAQU5AhCtCQcbe9BrBp+51FlyqbY0yT', 1),
+	('marbre', '39F0F82EA31E72DB16CE63193E94A5EAFB56214B41A20393CC7F773E5491F8B4', 'yxVPux1fg)9mZG!nW4Nyp02v90EF/!:j', 1),
+	('tatmer', '367111A4ED05280B4AF574017E454B0BCD4BD1DDCFE3BA990FA5634B3AD17C75', '#=Pt-Qt*ff9aIsDn(H1Hd)R(cfdA:2Pr', 1);
 
 INSERT INTO
-	customer_address (address_id, user_id)
+	customer_address (address_id, user_id, active)
 VALUES
-	(1, 1),
-	(2, 2),
-	(3, 3),
-	(4, 4),
-	(5, 5),
-	(6, 6),
-	(7, 7),
-	(8, 8);
+	(1, 1, 1),
+	(2, 2, 1),
+	(3, 3, 1),
+	(4, 4, 1),
+	(5, 5, 1),
+	(6, 6, 1),
+	(7, 7, 1),
+	(8, 8, 1);
 
 INSERT INTO
 	goods_category (category_id, goods_id, active)
@@ -491,24 +491,24 @@ VALUES
 	(9, 2, 2.2, 2.2, 1, 1);
 
 INSERT INTO
-	partner (company_name, office_address_id, iban)
+	partner (company_name, office_address_id, iban, active)
 VALUES
-	('ALPE-PANON d.o.o.', 9, 'SI56031001003426009'),
-	('Patrick\'s Pub', 10, 'SI56031001003426010'),
-	('Kitajska Restavracija Zvezda', 11, 'SI56031001003426011'),
-	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012');
+	('ALPE-PANON d.o.o.', 9, 'SI56031001003426009', 1),
+	('Patrick\'s Pub', 10, 'SI56031001003426010', 1),
+	('Kitajska Restavracija Zvezda', 11, 'SI56031001003426011', 1),
+	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 1);
 
 INSERT INTO
-	partner_location (address_id, partner_id, title)
+	partner_location (address_id, partner_id, title, active)
 VALUES
-	(13, 1, 'McDonald\'s Swaty'),
-	(10, 2, 'Patrick\'s Pub'),
-	(11, 3, 'Kitajska Restavracija Zvezda'),
-	(12, 4, 'Kitajska Restavracija Zlata Srna'),
-	(14, 1, 'McDonald\'s Europark'),
-	(15, 1, 'McDonald\'s Ptujska'),
-	(16, 1, 'McDonald\'s Petrol'),
-	(17, 1, 'McDonald\'s Čopova');
+	(13, 1, 'McDonald\'s Swaty', 1),
+	(10, 2, 'Patrick\'s Pub', 1),
+	(11, 3, 'Kitajska Restavracija Zvezda', 1),
+	(12, 4, 'Kitajska Restavracija Zlata Srna', 1),
+	(14, 1, 'McDonald\'s Europark', 1),
+	(15, 1, 'McDonald\'s Ptujska', 1),
+	(16, 1, 'McDonald\'s Petrol', 1),
+	(17, 1, 'McDonald\'s Čopova', 1);
 
 INSERT INTO
 	partner_location_goods (goods_id, partner_location_id, active)
