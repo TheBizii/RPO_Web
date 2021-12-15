@@ -61,16 +61,29 @@ CREATE TABLE `state`
 PRIMARY KEY (`ID`)
 );
 
+CREATE TABLE `credentials`
+(
+ `ID`       integer NOT NULL AUTO_INCREMENT ,
+ `email`    varchar(255) NOT NULL ,
+ `password` char(64) NOT NULL ,
+ `salt`     char(32) NOT NULL ,
+ `active`   tinyint NOT NULL ,
+
+PRIMARY KEY (`ID`),
+);
+
 CREATE TABLE `user`
 (
- `ID`          integer NOT NULL AUTO_INCREMENT ,
- `first_name`  varchar(45) NOT NULL ,
- `middle_name` varchar(45) NULL ,
- `last_name`   varchar(45) NOT NULL ,
- `phone`       varchar(20) NOT NULL ,
- `active`      tinyint NOT NULL ,
+ `ID`             integer NOT NULL AUTO_INCREMENT ,
+ `first_name`     varchar(45) NOT NULL ,
+ `middle_name`    varchar(45) NULL ,
+ `last_name`      varchar(45) NOT NULL ,
+ `phone`          varchar(20) NOT NULL ,
+ `credentials_id` integer NOT NULL ,
+ `active`         tinyint NOT NULL ,
 
-PRIMARY KEY (`ID`)
+PRIMARY KEY (`ID`),
+FOREIGN KEY (`credentials_id`) REFERENCES `credentials`(`ID`)
 );
 
 CREATE TABLE `post`
@@ -144,20 +157,6 @@ KEY `fkIdx_334` (`affected_article_id`),
 CONSTRAINT `FK_332` FOREIGN KEY `fkIdx_334` (`affected_article_id`) REFERENCES `goods` (`ID`),
 KEY `fkIdx_337` (`affected_category_id`),
 CONSTRAINT `FK_335` FOREIGN KEY `fkIdx_337` (`affected_category_id`) REFERENCES `category` (`ID`)
-);
-
-CREATE TABLE `credentials`
-(
- `ID`       integer NOT NULL AUTO_INCREMENT ,
- `email`    varchar(255) NOT NULL ,
- `user_id`  integer NOT NULL ,
- `password` char(64) NOT NULL ,
- `salt`     char(32) NOT NULL ,
- `active`   tinyint NOT NULL ,
-
-PRIMARY KEY (`ID`),
-KEY `fkIdx_175` (`user_id`),
-CONSTRAINT `FK_173` FOREIGN KEY `fkIdx_175` (`user_id`) REFERENCES `user` (`ID`)
 );
 
 CREATE TABLE `customer_address`
