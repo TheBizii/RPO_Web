@@ -405,11 +405,11 @@ VALUES
 	('Poštna ulica 10', NULL, 1, 1),
 	('Loška ulica 10', NULL, 1, 1),
 	('Ulica Pohorskega bataljona 14', NULL, 1, 1),
-	('Tržaška ulica 6', NULL, 1, 1),
-	('Pobreška cesta 18', NULL, 1, 1),
+	('Tržaška ulica 6', POINT(45.5387681, 13.6590589), 1, 1),
+	('Pobreška cesta 18', POINT(46.5541571, 15.6516981), 1, 1),
 	('Ptujska cesta 106', POINT(46.53355615, 15.699469250830932),1, 1),
 	('Na polju 24', NULL, 1, 1),
-	('Čopova ulica 14', NULL, 11, 1);
+	('Čopova ulica 14', POINT(46.0522906, 14.5047258), 11, 1);
 
 
 INSERT INTO
