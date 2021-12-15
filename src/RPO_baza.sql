@@ -388,7 +388,9 @@ VALUES
 	('Berlin', 8, 1),
 	('Belgrade', 9, 1),
 	('Bern', 10, 1),
-	('Ljubljana', 1, 1);
+	('Ljubljana', 1, 1),
+	('Hrastnik', 1, 1),
+	('Celje', 1, 1);
 
 INSERT INTO
 	address (address, coordinate, post_id, active)
@@ -409,7 +411,14 @@ VALUES
 	('Pobreška cesta 18', POINT(46.5541571, 15.6516981), 1, 1),
 	('Ptujska cesta 106', POINT(46.53355615, 15.699469250830932),1, 1),
 	('Na polju 24', NULL, 1, 1),
-	('Čopova ulica 14', POINT(46.0522906, 14.5047258), 11, 1);
+	('Čopova ulica 14', POINT(46.0522906, 14.5047258), 11, 1),
+	('Log 10', NULL, 12, 1),
+	('Petkovškovo nabrežje 65', NULL, 11, 1),
+	('Cesta v mestni log 55', NULL, 11, 1),
+	('Nazorjeva ulica 4', NULL, 11, 1),
+	('Jamova cesta 105', NULL, 11, 1),
+	('Ameriška ulica 2', NULL, 11, 1),
+	('Prešernova ulica 10', NULL, 13, 1);
 
 
 INSERT INTO
@@ -499,7 +508,9 @@ VALUES
 	('ALPE-PANON d.o.o.', 9, 'SI56031001003426009', 1),
 	('Patrick\'s Pub', 10, 'SI56031001003426010', 1),
 	('Kitajska Restavracija Zvezda', 11, 'SI56031001003426011', 1),
-	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 1);
+	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 1),
+	('JEJ, storitve, d.o.o.', 18, 'SI56610000018118880', 1),
+	('PALTA d.o.o.', 20, 'SI56031601001033086', 1);
 
 INSERT INTO
 	partner_location (address_id, partner_id, title, active)
@@ -511,7 +522,12 @@ VALUES
 	(14, 1, 'McDonald\'s Europark', 1),
 	(15, 1, 'McDonald\'s Ptujska', 1),
 	(16, 1, 'McDonald\'s Petrol', 1),
-	(17, 1, 'McDonald\'s Čopova', 1);
+	(17, 1, 'McDonald\'s Čopova', 1),
+	(19, 5, 'Slovenian Dinner Experience', 1),
+	(21, 6, 'Hood Burger Center', 1),
+	(22, 6, 'Hood Burger Vič', 1),
+	(23, 6, 'Hood Burger BTC', 1),
+	(24, 6, 'Hood Burger Celje', 1);
 
 INSERT INTO
 	partner_location_goods (goods_id, partner_location_id, active)
