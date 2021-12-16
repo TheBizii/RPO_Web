@@ -30,16 +30,29 @@ async function getAllCountries () {
   }
 }
 
-async function confirmLoginInformation (email, password) {
+async function confirmLoginInformation (username, password) {
   try {
-    const res = []
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
-    const result = await query(`SELECT * FROM credentials WHERE email = "${email}" AND password = "${password}" AND active = 1`)
+    const result = await query(`SELECT * FROM credentials WHERE username = "${username}" AND password = "${password}" AND active = 1`)
     if (result.length === 0) {
       return null
     }
-    return JSON.stringify(res)
+    return JSON.stringify(result)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function getSaltForLogin (username) {
+  try {
+    await connectToDB()
+    const query = await promisify(connection.query).bind(connection)
+    const result = await query(`SELECT salt FROM credentials WHERE username = "${username}" AND active = 1`)
+    if (result.length === 0) {
+      return null
+    }
+    return JSON.stringify(result)
   } catch (err) {
     console.log(err)
   }
@@ -87,6 +100,7 @@ async function query (qry) {
 module.exports = {
   getAllCountries,
   confirmLoginInformation,
+  getSaltForLogin,
   getAllShops,
   updateCoordinates,
   query

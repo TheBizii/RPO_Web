@@ -64,7 +64,7 @@ PRIMARY KEY (`ID`)
 CREATE TABLE `credentials`
 (
  `ID`       integer NOT NULL AUTO_INCREMENT ,
- `email`    varchar(255) NOT NULL ,
+ `username` varchar(255) NOT NULL ,
  `password` char(64) NOT NULL ,
  `salt`     char(32) NOT NULL ,
  `active`   tinyint NOT NULL ,
@@ -352,7 +352,7 @@ VALUES
 	('Finished', 1);
 	
 INSERT INTO
-	credentials (email, password, salt, active)
+	credentials (username, password, salt, active)
 VALUES
 	('TheBizii', '9E22C29AD394F8476C2E33F7E83F0CA060B8A5AF130F1470457DB95C635EC445', 'R=g*AksavvrdN9xUoU?-NpofJ7-y@trE', 1),
 	('VehoTim', 'D00D7CE634085C7D34BC991F230781C96A83440460DC69E3B8137FA0F537760D', '3ld@js/h@xWoF/v)Ek._?tpLnV.nkOqW', 1),
