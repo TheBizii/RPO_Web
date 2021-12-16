@@ -217,6 +217,7 @@ footer {
   align-items: center;
   margin-top: 2%;
 }
+
 .cart-box-iinfo {
   flex: 4;
   width: 20%;
@@ -244,7 +245,6 @@ footer {
   flex: 3;
   text-align: right;
   padding-right: 5px;
-
 }
 
 .uinfo-l {
@@ -351,4 +351,116 @@ footer {
   background-color: gray;
   color: white;
   text-align: center;
+}
+
+/*settings style*/
+.flex-parent-sett {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+
+.set-box-uinfo, .set-box-pinfo, .set-box-linfo, .set-box-pmode {
+  background-color: rgb(217, 219, 219);
+  border: 2px solid black;
+  padding-right: 5px;
+  border-radius: 4px;
+  padding-left: 5px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.uinfom, .linfom, .pinfom, .pmodem {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-ucontent, .modal-pcontent, .modal-lcontent, .modal-pmodecontent {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.mheader {
+  display: flex;
+  /* float: right; */
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.title {
+  flex: 8;
+}
+
+.close {
+  color: #aaaaaa;
+  align-items: flex-end;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.muser-n, .muser-p, .muser-g, .muser-e {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.un, .up, .ug, .ue {
+  flex: 7;
+  padding-left: 10px;
+}
+
+.unc, .upc, .ugc, .uec {
+  flex: 3;
+  text-align: right;
+  padding-top: 15px;
+  padding-right: 10px;
+}
+
+/* .pbsave {
+  display: block;
+  float: right;
+  margin-left: auto;
+  margin-right: 0;
+} */
+
+.pbs {
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.pbs {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+
+.pbs:hover {
+  background-color: #008CBA;
+  color: white;
 }

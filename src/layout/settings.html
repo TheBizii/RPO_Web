@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bolt</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class=>
+
+<header>
+  <div class="div-header-container">
+    <div class="divlogo">  <img src="Pictures/Temp.jpg" alt="logo" class="logo"> </div>
+    <div class="dropdown">
+      <button class="dropbtn">Account</button>
+      <div class="dropdown-content">
+        <a href="#">Settints</a>
+        <a href="#">History</a>
+        <a href="#">Log out</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="UHbar-parent">
+  <div class="UHbar">
+      <span class="sidebar_button" onclick="openNav()">&#9776; open</span>
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Restaurants</a>
+        <a href="#">Shops</a>
+        <a href="#">Something</a>
+        <a href="#">Something</a>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="flex-parent-sett">
+  <div class="set-box-uset">
+
+    <!-- user info -->
+    <div class="set-box-uinfo" id="uinfoopen">
+        <p>Nastavitve uporabnika</p>
+    </div>
+    <div id="uinfo-modal" class="uinfom">
+      <div class="modal-ucontent">
+        <div class="mheader">
+          <div class="title"><p>Nastavitve uporabnika</p></div>
+          <div class="close"><span id="closemu">&times;</span></div>
+        </div>
+       <div class="muser-n">
+         <div class="un"><p>Marcel Kumer</p></div>
+         <div class="unc"><a href="#">change</a></div>
+       </div>
+       <div class="muser-p">
+         <div class="up"><p>041904910</p></div>
+         <div class="upc"><a href="#">change</a></div>
+       </div>
+       <div class="muser-e">
+         <div class="ue"><p>marcel.kumer@student.um.si</p></div>
+         <div class="uec"><a href="#">change</a></div>
+       </div>
+       <div class="muser-g">
+         <div class="ug"><p>**************</p></div>
+         <div class="ugc"><a href="#">change</a></div>
+       </div>
+     </div>
+    </div>
+
+    <!-- paying info -->
+    <div class="set-box-pinfo" id="pinfoopen">
+        <p>Nastavitve za plačila</p>
+    </div>
+    <div id="pinfo-modal" class="pinfom">
+      <div class="modal-pcontent">
+        <div class="mheader">
+          <div class="title"><p>Načini plačila</p></div>
+          <div class="close"><span id="closemp">&times;</span></div>
+        </div>
+        <div class="mpaying-o">
+          <form action="#">
+            <p>Način plačila:</p>
+            <input type="radio" id="pp" name="paying option" value="pp">
+            <label for="age1">PayPal</label><br>
+            <input type="radio" id="mc" name="paying option" value="mc">
+            <label for="age2">Mastercard/Visa</label><br>
+            <input type="radio" id="op" name="paying option" value="op">
+            <label for="age3">Ob prevzemu</label><br>
+            <!-- <input type="submit" value="Submit"> -->
+          </form>
+        </div>
+        <div class="pbsave">
+          <button class="pbs" type="button" name="button">Save</button>
+        </div>
+     </div>
+    </div>
+
+    <!-- location info -->
+    <div class="set-box-linfo" id="linfoopen">
+        <p>Nastavitve lokacije</p>
+    </div>
+    <div id="linfo-modal" class="linfom">
+      <div class="modal-lcontent">
+        <div class="mheader">
+          <div class="title"><p>Lokacije dostav</p></div>
+          <div class="close"><span id="closeml">&times;</span></div>
+        </div>
+     </div>
+    </div>
+
+    <!-- account mode -->
+    <div class="set-box-pmode" id="pmodeopen">
+        <p>Način računa</p>
+    </div>
+    <div id="pmode-modal" class="pmodem">
+      <div class="modal-pmodecontent">
+        <div class="mheader">
+          <div class="title"><p>Način računa</p></div>
+          <div class="close"><span id="closempmode">&times;</span></div>
+        </div>
+     </div>
+    </div>
+
+  </div>
+</div>
+
+
+<footer class="footer">
+  <p>Footer</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
