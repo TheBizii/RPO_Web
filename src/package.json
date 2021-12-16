@@ -29,7 +29,6 @@
   "homepage": "https://github.com/TheBizii/RPO_Web#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "node": "^17.1.0",
