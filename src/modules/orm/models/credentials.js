@@ -53,6 +53,25 @@ class Credentials extends Model {
     return null
   }
 
+  async readByUsername (username) {
+    try {
+      const sql = `SELECT * FROM credentials WHERE username = ${username} AND active <> 0;`
+      const res = await db.query(sql)
+      if (res.length > 0) {
+        const credentials = res[0]
+        this.setID(credentials.ID)
+        this.setUsername(credentials.username)
+        this.setPassword(credentials.password)
+        this.setSalt(credentials.salt)
+        this.setActive(credentials.active)
+        return this
+      }
+    } catch (err) {
+      console.log(err)
+    }
+    return null
+  }
+
   static async readAll () {
     try {
       const sql = 'SELECT ID FROM credentials WHERE active <> 0'
