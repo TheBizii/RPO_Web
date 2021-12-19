@@ -3,3 +3,4 @@ src/config/config.js
 *.log
 *.swp
 src/modules/pstWrite.js
+package-lock.json

@@ -13,33 +13,29 @@ async function connectToDB () {
   })
 }
 
-async function getAllCountries () {
+async function confirmLoginInformation (username, password) {
   try {
-    const res = []
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
-    const result = await query('SELECT * FROM country')
-    const keys = Object.keys(result)
-    for (let i = 0; i < keys.length; i++) {
-      res.push([keys[i], result[keys[i]]])
+    const result = await query(`SELECT * FROM credentials WHERE username = "${username}" AND password = "${password}" AND active = 1`)
+    if (result.length === 0) {
+      return null
     }
-    connection.end()
-    return JSON.stringify(res) || 'Non valid data'
+    return JSON.stringify(result)
   } catch (err) {
     console.log(err)
   }
 }
 
-async function confirmLoginInformation (email, password) {
+async function getSaltForLogin (username) {
   try {
-    const res = []
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
-    const result = await query(`SELECT * FROM credentials WHERE email = "${email}" AND password = "${password}" AND active = 1`)
+    const result = await query(`SELECT salt FROM credentials WHERE username = "${username}" AND active = 1`)
     if (result.length === 0) {
       return null
     }
-    return JSON.stringify(res)
+    return JSON.stringify(result)
   } catch (err) {
     console.log(err)
   }
@@ -49,7 +45,21 @@ async function getAllShops () {
   try {
     await connectToDB()
     const query = await promisify(connection.query).bind(connection)
-    const result = await query('SELECT a.address, a.coordinate, pl.title FROM address a JOIN partner_location pl ON pl.address_id = a.ID')
+    const result = await query('SELECT a.id, a.address, a.coordinate, pl.title, p.city_name as city, c.name as country FROM address a JOIN partner_location pl ON pl.address_id = a.ID JOIN post p ON a.post_id = p.ID JOIN country c ON p.country_id = c.ID')
+    if (result.length === 0) {
+      return null
+    }
+    return JSON.stringify(result)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function updateCoordinates (id, lat, lng) {
+  try {
+    await connectToDB()
+    const query = await promisify(connection.query).bind(connection)
+    const result = await query(`UPDATE address SET coordinate = POINT(${lat}, ${lng}) WHERE ID = ${id}`)
     if (result.length === 0) {
       return null
     }
@@ -71,8 +81,9 @@ async function query (qry) {
 }
 
 module.exports = {
-  getAllCountries,
   confirmLoginInformation,
+  getSaltForLogin,
   getAllShops,
+  updateCoordinates,
   query
 }

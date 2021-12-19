@@ -64,7 +64,7 @@ PRIMARY KEY (`ID`)
 CREATE TABLE `credentials`
 (
  `ID`       integer NOT NULL AUTO_INCREMENT ,
- `email`    varchar(255) NOT NULL ,
+ `username` varchar(255) NOT NULL ,
  `password` char(64) NOT NULL ,
  `salt`     char(32) NOT NULL ,
  `active`   tinyint NOT NULL ,
@@ -352,16 +352,16 @@ VALUES
 	('Finished', 1);
 	
 INSERT INTO
-	credentials (email, password, salt, active)
+	credentials (username, password, salt, active)
 VALUES
-	('TheBizii', 'B2D8C3D739D5EDC4259811AA3BB290131DB0812A747CD7B0B22D7B2BC874B877', 'R=g*AksavvrdN9xUoU?-NpofJ7-y@trE', 1),
-	('VehoTim', '4557BA1BC41BA578D27C8A37F37B2A5A479203BEF156E58CC9CB2EDA2A58A34E', '3ld@js/h@xWoF/v)Ek._?tpLnV.nkOqW', 1),
-	('blueflamed', '075E5681B25F2675570CA6EF358826344FCECE97FB97E54ECF517BC07D48FEE6', '80Tv51VW#B70EM!2d3Iz-BvPnIp8/6E)', 1),
-	('profek10', 'FEFF8B2BDF4629CB4AF7FCA02C66206A3DD0CBE4DF8295AF5D8AED0FDA5BDF73', 'cZVAplgY.hw5@DY*#.hcak4u41b@Hg:@', 1),
-	('judcal', '7EA047EFDF158389F6937A281F7D242124BDF487E7AE1628E96241281268D1CD', ')cvXbkn:yMzd*L2QI(3pWZ?Xg6BSXk@F', 1),
-	('lorwan', 'B961152839C3E6FA2A32A91A73CC7AAF316CCEDC52A554EFAD1B2ACC01FB36B7', 'jOAQU5AhCtCQcbe9BrBp+51FlyqbY0yT', 1),
-	('marbre', '39F0F82EA31E72DB16CE63193E94A5EAFB56214B41A20393CC7F773E5491F8B4', 'yxVPux1fg)9mZG!nW4Nyp02v90EF/!:j', 1),
-	('tatmer', '367111A4ED05280B4AF574017E454B0BCD4BD1DDCFE3BA990FA5634B3AD17C75', '#=Pt-Qt*ff9aIsDn(H1Hd)R(cfdA:2Pr', 1);
+	('TheBizii', '9E22C29AD394F8476C2E33F7E83F0CA060B8A5AF130F1470457DB95C635EC445', 'R=g*AksavvrdN9xUoU?-NpofJ7-y@trE', 1),
+	('VehoTim', 'D00D7CE634085C7D34BC991F230781C96A83440460DC69E3B8137FA0F537760D', '3ld@js/h@xWoF/v)Ek._?tpLnV.nkOqW', 1),
+	('blueflamed', '5D84FFFDF4ED9293BF8CC19489D64F1712BF92B7635F400B317EFE8273A7B951', '80Tv51VW#B70EM!2d3Iz-BvPnIp8/6E)', 1),
+	('profek10', 'D6D23BEA598530EEC0FF799FB3C909B6FAB1834BA9FE9540C081739B74287599', 'cZVAplgY.hw5@DY*#.hcak4u41b@Hg:@', 1),
+	('judcal', '1D9FD63DBBC2A97D452117AA52CB55E492FB4E655AD316B37B6D7DC9F790BA5C', ')cvXbkn:yMzd*L2QI(3pWZ?Xg6BSXk@F', 1),
+	('lorwan', '449A6CDFAF646905F855D699EF8392B6911256D6001FF399A51C529807719CA5', 'jOAQU5AhCtCQcbe9BrBp+51FlyqbY0yT', 1),
+	('marbre', 'C18FB58E190617EE1F1270CBEBE7F1ADC9C4D4289D9A59E76302F5FAC40E49FC', 'yxVPux1fg)9mZG!nW4Nyp02v90EF/!:j', 1),
+	('tatmer', 'FE2637571A525F13E9B33B36AE86FFEEE31D80456CE5D3AD61E0971A0E388FDF', '#=Pt-Qt*ff9aIsDn(H1Hd)R(cfdA:2Pr', 1);
 
 INSERT INTO
 	`user` (first_name, middle_name, last_name, phone, credentials_id, active)
@@ -388,7 +388,9 @@ VALUES
 	('Berlin', 8, 1),
 	('Belgrade', 9, 1),
 	('Bern', 10, 1),
-	('Ljubljana', 1, 1);
+	('Ljubljana', 1, 1),
+	('Hrastnik', 1, 1),
+	('Celje', 1, 1);
 
 INSERT INTO
 	address (address, coordinate, post_id, active)
@@ -405,11 +407,18 @@ VALUES
 	('Poštna ulica 10', NULL, 1, 1),
 	('Loška ulica 10', NULL, 1, 1),
 	('Ulica Pohorskega bataljona 14', NULL, 1, 1),
-	('Tržaška ulica 6', NULL, 1, 1),
+	('Tržaška cesta 6', NULL, 1, 1),
 	('Pobreška cesta 18', NULL, 1, 1),
-	('Ptujska cesta 106', POINT(46.53355615, 15.699469250830932),1, 1),
+	('Ptujska cesta 106', NULL,1, 1),
 	('Na polju 24', NULL, 1, 1),
-	('Čopova ulica 14', NULL, 11, 1);
+	('Čopova ulica 14', NULL, 11, 1),
+	('Log 10', NULL, 12, 1),
+	('Petkovškovo nabrežje 65', NULL, 11, 1),
+	('Cesta v mestni log 55', NULL, 11, 1),
+	('Nazorjeva ulica 4', NULL, 11, 1),
+	('Jamova cesta 105', NULL, 11, 1),
+	('Ameriška ulica 2', NULL, 11, 1),
+	('Prešernova ulica 10', NULL, 13, 1);
 
 
 INSERT INTO
@@ -499,7 +508,9 @@ VALUES
 	('ALPE-PANON d.o.o.', 9, 'SI56031001003426009', 1),
 	('Patrick\'s Pub', 10, 'SI56031001003426010', 1),
 	('Kitajska Restavracija Zvezda', 11, 'SI56031001003426011', 1),
-	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 1);
+	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 1),
+	('JEJ, storitve, d.o.o.', 18, 'SI56610000018118880', 1),
+	('PALTA d.o.o.', 20, 'SI56031601001033086', 1);
 
 INSERT INTO
 	partner_location (address_id, partner_id, title, active)
@@ -511,7 +522,12 @@ VALUES
 	(14, 1, 'McDonald\'s Europark', 1),
 	(15, 1, 'McDonald\'s Ptujska', 1),
 	(16, 1, 'McDonald\'s Petrol', 1),
-	(17, 1, 'McDonald\'s Čopova', 1);
+	(17, 1, 'McDonald\'s Čopova', 1),
+	(19, 5, 'Slovenian Dinner Experience', 1),
+	(21, 6, 'Hood Burger Center', 1),
+	(22, 6, 'Hood Burger Vič', 1),
+	(23, 6, 'Hood Burger BTC', 1),
+	(24, 6, 'Hood Burger Celje', 1);
 
 INSERT INTO
 	partner_location_goods (goods_id, partner_location_id, active)
