@@ -1,10 +1,9 @@
+const db = require('../../dn');
 const model = require('../model');
-const address = require('address');
-const partner = require('partner');
+const Address = require('./address');
+const Partner = require('./partner');
 
 const Model = model.Model;
-const Address = address.Address;
-const partner = partner.Partner;
 
 class PartnerLocation extends Model {
   constructor() {
@@ -31,6 +30,21 @@ class PartnerLocation extends Model {
     this.title = title;
   }
 
+  addGoods(goods) {
+    if(this.goods === undefined) {
+      this.goods = [];
+    }
+
+    if(this.goods.includes(goods)) return;
+    this.goods.push(goods);
+  }
+
+  removeGoods(goods) {
+    if(this.goods === undefined) return;
+
+    this.goods = this.goods.filter(g => g !== goods);
+  }
+
   getAddress() {
     return this.address;
   }
@@ -41,6 +55,10 @@ class PartnerLocation extends Model {
 
   getTitle() {
     return this.title;
+  }
+
+  getGoods() {
+    return this.goods;
   }
 }
 

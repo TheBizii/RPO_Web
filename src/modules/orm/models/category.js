@@ -24,6 +24,21 @@ class Category extends Model {
     this.imageUrl = imageUrl;
   }
 
+  addGoods(goods) {
+    if(this.goods === undefined) {
+      this.goods = [];
+    }
+
+    if(this.goods.includes(goods)) return;
+    this.goods.push(goods);
+  }
+
+  removeGoods(goods) {
+    if(this.goods === undefined) return;
+
+    this.goods = this.goods.filter(g => g !== goods);
+  }
+
   getTitle() {
     return this.title;
   }
@@ -34,6 +49,10 @@ class Category extends Model {
 
   getImageUrl() {
     return this.imageUrl;
+  }
+
+  getGoods() {
+    return this.goods;
   }
 
   async create() {

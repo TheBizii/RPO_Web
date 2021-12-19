@@ -1,6 +1,6 @@
 const db = require('../../db');
 const model = require('../model');
-const Credentials = require('../credentials');
+const Credentials = require('./credentials');
 
 const Model = model.Model;
 
@@ -32,8 +32,21 @@ class User extends Model {
       throw new Error(`Got ${credentials.constructor}, expected object of type Credentials.`);
     }
   }
+  
+  addAddress(address) {
+    if(this.addresses === undefined) {
+      this.addresses = [];
+    }
 
-  // TODO: addAddress, removeAddress
+    if(this.addresses.includes(address)) return;
+    this.addresses.push(address);
+  }
+
+  removeAddress(address) {
+    if(this.addresses === undefined) return;
+
+    this.addresses = this.addresses.filter(addr => addr !== address);
+  }
 
   getFirstName() {
     return this.firstName;
@@ -82,9 +95,15 @@ class User extends Model {
         this.setMiddleName(user.middle_name);
         this.setLastName(user.last_name);
         this.setPhone(user.phone);
-        // TODO: Load addresses
         this.setCredentials(credentials);
         this.setActive(user.active);
+
+        // Load addresses
+        let addressql = `SELECT address_id FROM customer_address WHERE user_id="${ user.ID }" AND active <> 0;`;
+        let addressRes = await db.query(addressql);
+        for(let i = 0; i < addressRes.length; i++) {
+          this.addAddress(addressRes[i].address_id);
+        }
         return this;
       }
     } catch(err) {

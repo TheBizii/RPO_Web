@@ -33,7 +33,35 @@ class Goods extends Model {
     this.imageUrl = imageUrl;
   }
 
-  // TODO: addCategory, removeCategory
+  addCategory(category) {
+    if(this.categories === undefined) {
+      this.categories = [];
+    }
+
+    if(this.categories.includes(category)) return;
+    this.categories.push(category);
+  }
+
+  removeCategory(category) {
+    if(this.categories === undefined) return;
+
+    this.categories = this.categories.filter(cat => cat !== category);
+  }
+
+  addPartnerLocation(partnerLocation) {
+    if(this.partnerLocations === undefined) {
+      this.partnerLocations = [];
+    }
+
+    if(this.partnerLocations.includes(partnerLocation)) return;
+    this.partnerLocations.push(partnerLocation);
+  }
+  
+  removePartnerLocation(partnerLocation) {
+    if(this.partnerLocations === undefined) return;
+
+    this.partnerLocations = this.partnerLocations.filter(loc => loc !== partnerLocation);
+  }
 
   getName() {
     return this.name;
@@ -55,9 +83,13 @@ class Goods extends Model {
     return this.imageUrl;
   }
 
-  /*getCategories() {
+  getCategories() {
     return this.categories;
-  }*/
+  }
+
+  getPartnerLocations() {
+    return this.partnerLocations();
+  }
 
   async create() {
     try {

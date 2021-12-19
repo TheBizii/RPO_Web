@@ -21,12 +21,31 @@ class Address extends Model {
     }
   }
 
+  addUser(user) {
+    if(this.users === undefined) {
+      this.users = [];
+    }
+
+    if(this.users.includes(user)) return;
+    this.users.push(user);
+  }
+
+  removeUser(user) {
+    if(this.users === undefined) return;
+
+    this.users = this.users.filter(usr => usr !== user);
+  }
+
   getAddress() {
     return this.address;
   }
 
   getPost() {
     return this.post;
+  }
+
+  getUsers() {
+    return this.users;
   }
 
   async create() {
