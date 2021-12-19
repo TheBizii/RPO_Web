@@ -81,7 +81,6 @@ async function query (qry) {
 }
 
 module.exports = {
-  getAllCountries,
   confirmLoginInformation,
   getSaltForLogin,
   getAllShops,
