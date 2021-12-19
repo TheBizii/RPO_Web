@@ -13,23 +13,6 @@ async function connectToDB () {
   })
 }
 
-async function getAllCountries () {
-  try {
-    const res = []
-    await connectToDB()
-    const query = await promisify(connection.query).bind(connection)
-    const result = await query('SELECT * FROM country')
-    const keys = Object.keys(result)
-    for (let i = 0; i < keys.length; i++) {
-      res.push([keys[i], result[keys[i]]])
-    }
-    connection.end()
-    return JSON.stringify(res) || 'Non valid data'
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 async function confirmLoginInformation (username, password) {
   try {
     await connectToDB()
