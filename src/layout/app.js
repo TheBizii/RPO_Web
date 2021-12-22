@@ -1,3 +1,10 @@
+//header
+
+$(document).ready( function() {
+    $('#header').load("header.html");
+});
+
+// sidebar
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("body").style.marginLeft = "250px";
@@ -8,6 +15,7 @@ function closeNav() {
   document.getElementById("body").style.marginLeft = "0";
 }
 
+//settings
 //user info
 document.getElementById("uinfoopen").onclick = function() {
   console.log("im here user");
@@ -17,25 +25,6 @@ document.getElementById("uinfoopen").onclick = function() {
 document.getElementById("closemu").onclick = function() {
   console.log("closebybutton user");
   document.getElementById("uinfo-modal").style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == document.getElementById("uinfo-modal")) {
-    console.log("close user");
-    document.getElementById("uinfo-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById("pinfo-modal")) {
-    console.log("close paying");
-    document.getElementById("pinfo-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById("linfo-modal")) {
-      console.log("close location");
-      document.getElementById("linfo-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById("pmode-modal")) {
-    console.log("close mode");
-    document.getElementById("pmode-modal").style.display = "none";
-  }
 }
 
 //paying iinfo
@@ -71,7 +60,27 @@ document.getElementById("closempmode").onclick = function() {
   document.getElementById("pmode-modal").style.display = "none";
 }
 
-
+window.onclick = function(event) {
+  if (event.target == document.getElementById("uinfo-modal")) {
+    console.log("close user");
+    document.getElementById("uinfo-modal").style.display = "none";
+  }
+  else if (event.target == document.getElementById("pinfo-modal")) {
+    console.log("close paying");
+    document.getElementById("pinfo-modal").style.display = "none";
+  }
+  else if (event.target == document.getElementById("linfo-modal")) {
+      console.log("close location");
+      document.getElementById("linfo-modal").style.display = "none";
+  }
+  else if (event.target == document.getElementById("pmode-modal")) {
+    console.log("close mode");
+    document.getElementById("pmode-modal").style.display = "none";
+  }
+  else if (event.target == document.getElementById('id01')) {
+      document.getElementById('id01').style.display = "none";
+  }
+}
 // function(){
 //   $(".set-box-uinfo").on("click", function(){
 //
