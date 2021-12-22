@@ -48,20 +48,20 @@ class User extends Model {
     this.addresses = this.addresses.filter(addr => addr !== address)
   }
 
-  addRole(role) {
+  addRole (role) {
     if (this.roles === undefined) {
-      this.roles = [];
+      this.roles = []
     }
 
-    if (this.roles.includes(role)) return;
+    if (this.roles.includes(role)) return
 
-    this.roles.push(role);
+    this.roles.push(role)
   }
 
-  removeRole(role) {
-    if (this.roles === undefined) return;
+  removeRole (role) {
+    if (this.roles === undefined) return
 
-    this.roles = this.roles.filter(r => r !== role);
+    this.roles = this.roles.filter(r => r !== role)
   }
 
   getFirstName () {
@@ -88,8 +88,8 @@ class User extends Model {
     return this.addresses
   }
 
-  getRoles() {
-    return this.roles;
+  getRoles () {
+    return this.roles
   }
 
   async create () {
@@ -129,10 +129,10 @@ class User extends Model {
         }
 
         // Load roles
-        const rolesql `SELECT role_id FROM user_roles WHERE user_id="${ id }" AND active <> 0;`;
-        const rolesRes = await db.query(rolesql);
-        for(let i = 0; i < rolesRes.length; i++) {
-          this.addRole(rolesRes[i].role_id);
+        const rolesql = `SELECT role_id FROM user_roles WHERE user_id="${id}" AND active <> 0;`
+        const rolesRes = await db.query(rolesql)
+        for (let i = 0; i < rolesRes.length; i++) {
+          this.addRole(rolesRes[i].role_id)
         }
 
         return this
@@ -143,37 +143,30 @@ class User extends Model {
     return null
   }
 
-  async readByUsername (username) {
+  static async readByUsername (username) {
     try {
       const sql = `SELECT * FROM user u JOIN credentials c ON u.credentials_id = c.ID WHERE username = "${username}" AND u.active <> 0 AND c.active <> 0;`
       const res = await db.query(sql)
       if (res.length > 0) {
+        const resUser = new User()
         const user = res[0]
         const credentials = new Credentials()
         await credentials.read(user.credentials_id)
-        this.setID(user.ID)
-        this.setFirstName(user.first_name)
-        this.setMiddleName(user.middle_name)
-        this.setLastName(user.last_name)
-        this.setPhone(user.phone)
-        this.setCredentials(credentials)
-        this.setActive(user.active)
+        resUser.setID(user.ID)
+        resUser.setFirstName(user.first_name)
+        resUser.setMiddleName(user.middle_name)
+        resUser.setLastName(user.last_name)
+        resUser.setPhone(user.phone)
+        resUser.setCredentials(credentials)
+        resUser.setActive(user.active)
 
         // Load addresses
         const addressql = `SELECT address_id FROM customer_address WHERE user_id="${user.ID}" AND active <> 0;`
         const addressRes = await db.query(addressql)
         for (let i = 0; i < addressRes.length; i++) {
-          this.addAddress(addressRes[i].address_id)
+          resUser.addAddress(addressRes[i].address_id)
         }
-        
-        // Load roles
-        const rolesql `SELECT role_id FROM user_roles WHERE user_id="${ user.ID }" AND active <> 0;`;
-        const rolesRes = await db.query(rolesql);
-        for(let i = 0; i < rolesRes.length; i++) {
-          this.addRole(rolesRes[i].role_id);
-        }
-
-        return this
+        return resUser
       }
     } catch (err) {
       console.log(err)
@@ -200,24 +193,25 @@ class User extends Model {
 
   async update () {
     try {
-      const sql = `UPDATE user SET first_name="${this.getFirstName()}", middle_name="${this.getMiddleName()}", last_name="${this.getLastName()}", phone="${this.getPhone()}", credentials_id="${this.getCredentials().getID()}" active="${this.getActive()}" WHERE ID=${this.getID()};`;
-      const res = await db.query(sql);
+      const sql = `UPDATE user SET first_name="${this.getFirstName()}", middle_name="${this.getMiddleName()}", last_name="${this.getLastName()}", phone="${this.getPhone()}", credentials_id="${this.getCredentials().getID()}" active="${this.getActive()}" WHERE ID=${this.getID()};`
+      const res = await db.query(sql)
 
       // Check if any roles have to be deleted
-      const rolesql `SELECT role_id FROM user_role WHERE user_id="${ user.ID }" AND active <> 0;`;
-      const rolesRes = await db.query(rolesql);
-      for(let i = 0; i < rolesRes.length; i++) {
-        if(!this.roles.contains(rolesRes[i])) {
-          rolesToRemove.push(remRole);
+      const rolesql = `SELECT role_id FROM user_role WHERE user_id="${this.getID()}" AND active <> 0;`
+      const rolesRes = await db.query(rolesql)
+      const rolesToRemove = []
+      for (let i = 0; i < rolesRes.length; i++) {
+        if (!this.roles.contains(rolesRes[i])) {
+          rolesToRemove.push(rolesRes[i])
         }
       }
 
-      if(rolesToRemove.length > 0) {
-        const remrolesql = `UPDATE user_role SET active=0 WHERE role_id IN (${ rolesToRemove.join() }) AND user_id=${ this.getID() };`;
-        await db.query(remrolesql);
+      if (rolesToRemove.length > 0) {
+        const remrolesql = `UPDATE user_role SET active=0 WHERE role_id IN (${rolesToRemove.join()}) AND user_id=${this.getID()};`
+        await db.query(rolesToRemove)
       }
 
-      return JSON.stringify(res);
+      return JSON.stringify(res)
     } catch (err) {
       console.log(err)
     }

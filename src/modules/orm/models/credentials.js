@@ -67,7 +67,7 @@ class Credentials extends Model {
 
   async readByUsername (username) {
     try {
-      const sql = `SELECT * FROM credentials WHERE username = ${username} AND active <> 0;`
+      const sql = `SELECT * FROM credentials WHERE username = "${username}" AND active <> 0;`
       const res = await db.query(sql)
       if (res.length > 0) {
         const credentials = res[0]
