@@ -11,11 +11,13 @@ const getCountry = require('./endpoints/getCountry')
 const postNearbyShops = require('./endpoints/postNearbyShops')
 const postLogin = require('./endpoints/postLogin')
 const postRegister = require('./endpoints/postRegister')
+const db = require('./modules/db')
 
 async function main () {
   pstWrite.init()
   const app = express()
   const server = http.createServer(app)
+  db.connectToDB()
   app.use(bodyParser.json({ limit: '10mb' }))
   app.use(express.json())
   app.use(cors)
