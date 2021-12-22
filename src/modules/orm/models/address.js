@@ -13,6 +13,10 @@ class Address extends Model {
     this.address = address;
   }
 
+  setCoordinates(coordinates) {
+    this.coordinates = coordinates;
+  }
+
   setPost(post) {
     if(post.constructor === Post) {
       this.post = post;
@@ -40,6 +44,10 @@ class Address extends Model {
     return this.address;
   }
 
+  getCoordinates() {
+    return this.coordinates;
+  }
+
   getPost() {
     return this.post;
   }
@@ -51,7 +59,7 @@ class Address extends Model {
   async create() {
     try {
       this.setActive(true);
-      let sql = `INSERT INTO address (address, post_id, active) VALUES ("${ this.getAddress() }", "${ this.getPost().getID() }", 1);`;
+      let sql = `INSERT INTO address (address, coordinates, post_id, active) VALUES ("${ this.getAddress() }", POINT(${ this.getCoordinates().x }, ${ this.getCoordinates().y }), "${ this.getPost().getID() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
       return res;
@@ -71,6 +79,7 @@ class Address extends Model {
         await post.read(address.post_id);
         this.setID(address.ID);
         this.setAddress(address.address);
+        this.setCoordinates(address.coordinates);
         this.setPost(post);
         this.setActive(address.active);
         return this;
@@ -102,7 +111,7 @@ class Address extends Model {
 
   async update() {
     try {
-      let sql = `UPDATE address SET address="${ this.getAddress() }", post_id="${ this.getPost().getID() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
+      let sql = `UPDATE address SET address="${ this.getAddress() }", coordinates=POINT(${ this.getCoordinates().x }, ${ this.getCoordinates().y }), post_id="${ this.getPost().getID() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
