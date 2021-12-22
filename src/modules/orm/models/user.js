@@ -127,6 +127,14 @@ class User extends Model {
         for (let i = 0; i < addressRes.length; i++) {
           this.addAddress(addressRes[i].address_id)
         }
+
+        // Load roles
+        const rolesql `SELECT role_id FROM user_roles WHERE user_id="${ id }" AND active <> 0;`;
+        const rolesRes = await db.query(rolesql);
+        for(let i = 0; i < rolesRes.length; i++) {
+          this.addRole(rolesRes[i].role_id);
+        }
+
         return this
       }
     } catch (err) {
@@ -157,6 +165,14 @@ class User extends Model {
         for (let i = 0; i < addressRes.length; i++) {
           this.addAddress(addressRes[i].address_id)
         }
+        
+        // Load roles
+        const rolesql `SELECT role_id FROM user_roles WHERE user_id="${ user.ID }" AND active <> 0;`;
+        const rolesRes = await db.query(rolesql);
+        for(let i = 0; i < rolesRes.length; i++) {
+          this.addRole(rolesRes[i].role_id);
+        }
+
         return this
       }
     } catch (err) {
@@ -184,9 +200,24 @@ class User extends Model {
 
   async update () {
     try {
-      const sql = `UPDATE user SET first_name="${this.getFirstName()}", middle_name="${this.getMiddleName()}", last_name="${this.getLastName()}", phone="${this.getPhone()}", credentials_id="${this.getCredentials().getID()}" active="${this.getActive()}" WHERE ID=${this.getID()};`
-      const res = await db.query(sql)
-      return JSON.stringify(res)
+      const sql = `UPDATE user SET first_name="${this.getFirstName()}", middle_name="${this.getMiddleName()}", last_name="${this.getLastName()}", phone="${this.getPhone()}", credentials_id="${this.getCredentials().getID()}" active="${this.getActive()}" WHERE ID=${this.getID()};`;
+      const res = await db.query(sql);
+
+      // Check if any roles have to be deleted
+      const rolesql `SELECT role_id FROM user_role WHERE user_id="${ user.ID }" AND active <> 0;`;
+      const rolesRes = await db.query(rolesql);
+      for(let i = 0; i < rolesRes.length; i++) {
+        if(!this.roles.contains(rolesRes[i])) {
+          rolesToRemove.push(remRole);
+        }
+      }
+
+      if(rolesToRemove.length > 0) {
+        const remrolesql = `UPDATE user_role SET active=0 WHERE role_id IN (${ rolesToRemove.join() }) AND user_id=${ this.getID() };`;
+        await db.query(remrolesql);
+      }
+
+      return JSON.stringify(res);
     } catch (err) {
       console.log(err)
     }
