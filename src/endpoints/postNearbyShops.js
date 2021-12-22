@@ -1,11 +1,10 @@
 const express = require('express')
 const nodeGeo = require('node-geocoder')
-const db = require('../modules/db')
 const router = express.Router()
 const params = {
   provider: 'openstreetmap'
 }
-// const Post = require('./modules/orm/models/post')
+const PartnerLocation = require('../modules/orm/models/partnerLocation')
 const geoCoder = nodeGeo(params)
 
 function measure (lat1, lon1, lat2, lon2) {
@@ -20,8 +19,6 @@ function measure (lat1, lon1, lat2, lon2) {
 }
 // <a href="https://my-location.org/?lat=46.5554&lng=15.6465" target="_blank">(46.5554,15.6465)</a>
 router.post('/nearbyShops', async function (req, res) {
-  // const posts = await Post.readAll()
-  // res.send(posts)
   res.setHeader('Content-Type', 'application/json')
   if (req.body.lat === undefined && req.body.lng === undefined) {
     res.json({
@@ -29,20 +26,19 @@ router.post('/nearbyShops', async function (req, res) {
     })
     return
   }
-  const queryResult = await db.getAllShops()
-  if (queryResult != null) {
-    const result = JSON.parse(queryResult)
-    const keys = Object.keys(result)
-    const resArr = []
-    for (let i = 0; i < keys.length; i++) {
+  const branches = await PartnerLocation.readAll()
+  const resArr = []
+  if (branches.length > 0) {
+    for (const branch of branches) {
       let coord = []
-      if (result[keys[i]].coordinate === null) {
-        coord = await geoCoder.geocode(`${result[keys[i]].address}, ${result[keys[i]].city} ${result[keys[i].country]}`)
-        db.updateCoordinates(result[keys[i]].id, coord[0].latitude, coord[0].longitude)
+      if (branch.getAddress().getCoordinates() === null) {
+        coord = await geoCoder.geocode(`${branch.getAddress().getAddress()}, ${branch.getAddress().getPost().getCityName()} ${branch.getAddress().getPost().getCountry().getName()}`)
+        branch.getAddress().setCoordinates({ x: coord[0].latitude, y: coord[0].longitude })
+        branch.getAddress().update()
       } else {
-        coord.push({ latitude: result[keys[i]].coordinate.x, longitude: result[keys[i]].coordinate.y })
+        coord.push({ latitude: branch.getAddress().getCoordinates().x, longitude: branch.getAddress().getCoordinates().y })
       }
-      resArr.push({ lat: coord[0].latitude, lon: coord[0].longitude, dis: Math.floor(measure(coord[0].latitude, coord[0].longitude, req.body.lat, req.body.lng) * 100) / 100, name: result[keys[i]].title })
+      resArr.push({ lat: coord[0].latitude, lon: coord[0].longitude, dis: Math.floor(measure(coord[0].latitude, coord[0].longitude, req.body.lat, req.body.lng) * 100) / 100, name: branch.getTitle() })
     }
     resArr.sort((a, b) => a.dis - b.dis)
     res.json({
