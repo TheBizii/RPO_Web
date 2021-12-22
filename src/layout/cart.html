@@ -6,31 +6,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery-3.6.0.min.js"></script>
 </head>
 <body class="body">
-
-<header>
+  <div id="header" class="headermain"></div>
+<!-- <header>
   <div class="div-header-container">
     <div class="divlogo">  <img src="Pictures/Temp.jpg" alt="logo" class="logo"> </div>
     <div class="dropdown">
       <button class="dropbtn">Account</button>
       <div class="dropdown-content">
-        <a href="#">Settints</a>
+        <a href="./settings.html">Settings</a>
         <a href="#">History</a>
         <a href="#">Log out</a>
       </div>
     </div>
   </div>
-</header>
+</header> -->
 
 <div class="UHbar-parent">
   <div class="UHbar">
       <span class="sidebar_button" onclick="openNav()">&#9776; open</span>
       <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="./index.html">Main</a>
         <a href="#">Restaurants</a>
         <a href="#">Shops</a>
-        <a href="#">Something</a>
         <a href="#">Something</a>
       </div>
   </div>
@@ -113,18 +114,6 @@
   <p>Footer</p>
 </footer>
 
+<script src="app.js"></script>
 </body>
 </html>
-
-
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("body").style.marginLeft = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("body").style.marginLeft = "0";
-}
-</script>

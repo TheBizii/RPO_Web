@@ -6,37 +6,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery-3.6.0.min.js"></script>
 </head>
-<body class=>
-
-<header>
-  <div class="div-header-container">
-    <div class="divlogo">  <img src="Pictures/Temp.jpg" alt="logo" class="logo"> </div>
-    <div class="dropdown">
-      <button class="dropbtn">Account</button>
-      <div class="dropdown-content">
-        <a href="#">Settints</a>
-        <a href="#">History</a>
-        <a href="#">Log out</a>
-      </div>
-    </div>
-  </div>
-</header>
+<body class="body">
+  <div id="header" class="headermain"></div>
 
 <div class="UHbar-parent">
   <div class="UHbar">
       <span class="sidebar_button" onclick="openNav()">&#9776; open</span>
       <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Restaurants</a>
+        <a href="./index.html">Main</a>
+        <a href="#">Restavracija</a>
         <a href="#">Shops</a>
-        <a href="#">Something</a>
         <a href="#">Something</a>
       </div>
   </div>
 </div>
-
-
 
 <div class="flex-parent-sett">
   <div class="set-box-uset">
@@ -83,12 +69,12 @@
         <div class="mpaying-o">
           <form action="#">
             <p>Način plačila:</p>
-            <input type="radio" id="pp" name="paying option" value="pp">
-            <label for="age1">PayPal</label><br>
+            <input type="radio" id="pp" name="paying option" value="pp" checked>
+            <label for="pay1">PayPal</label><br>
             <input type="radio" id="mc" name="paying option" value="mc">
-            <label for="age2">Mastercard/Visa</label><br>
+            <label for="pay2">Mastercard/Visa</label><br>
             <input type="radio" id="op" name="paying option" value="op">
-            <label for="age3">Ob prevzemu</label><br>
+            <label for="pay3">Ob prevzemu</label><br>
             <!-- <input type="submit" value="Submit"> -->
           </form>
         </div>
@@ -108,6 +94,24 @@
           <div class="title"><p>Lokacije dostav</p></div>
           <div class="close"><span id="closeml">&times;</span></div>
         </div>
+        <div class="mpaying-o">
+          <form action="#">
+            <p>Način plačila:</p>
+            <input type="radio" id="l1" name="location option" value="l1" checked>
+            <label for="loc1">Mariborska 15</label><br>
+            <input type="radio" id="l2" name="location option" value="l2">
+            <label for="loc2">Dobrna 15a</label><br>
+            <input type="radio" id="l3" name="location option" value="l3">
+            <label for="loc3">Valvasorjeva 45</label><br>
+            <!-- <input type="submit" value="Submit"> -->
+          </form>
+        </div>
+        <div class="lbsave">
+          <button class="lba" type="button" name="button">Save</button>
+        </div>
+        <div class="lbadd">
+          <button class="lbs" type="button" name="button">Add</button>
+        </div>
      </div>
     </div>
 
@@ -121,12 +125,29 @@
           <div class="title"><p>Način računa</p></div>
           <div class="close"><span id="closempmode">&times;</span></div>
         </div>
+        <div class="mpaying-o">
+          <form action="#">
+            <p>Način računa:</p>
+            <input type="radio" id="pp" name="location option" value="l1" checked>
+            <label for="loc1">Stranka</label><br>
+            <input type="radio" id="mc" name="location option" value="l2">
+            <label for="loc2">Dostavljalec</label><br>
+            <input type="radio" id="op" name="location option" value="l3">
+            <label for="loc3">Restavracija/trgovina</label><br>
+            <!-- <input type="submit" value="Submit"> -->
+          </form>
+        </div>
+        <div class="pssave">
+          <button class="psba" type="button" name="button">Save</button>
+        </div>
+        <div class="psadd">
+          <button class="psbs" type="button" name="button">Registracija za druge možnosti</button>
+        </div>
      </div>
     </div>
 
   </div>
 </div>
-
 
 <footer class="footer">
   <p>Footer</p>

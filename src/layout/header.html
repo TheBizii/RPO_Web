@@ -1,0 +1,40 @@
+  <div class="div-header-container">
+    <div class="divlogo">  <img src="pictures/temp.jpg" alt="logo" class="logo"> </div>
+    <div class="dropdown">
+      <button class="dropbtn">Account</button>
+      <div class="dropdown-content">
+        <a href="./settings.html">Settings</a>
+        <a href="#">History</a>
+        <a href="#">Log out</a>
+      </div>
+      <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="loginbtn">Login</button>
+    </div>
+  </div>
+
+  <div id="id01" class="loginmodal">
+
+    <form class="loginmodal-content" action="#" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="clloginm" title="Close Modal">&times;</span>
+        <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input class="luser" type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input class="lpass" type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit" class="loginbtn">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>
