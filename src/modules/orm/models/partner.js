@@ -1,9 +1,8 @@
 const db = require('../../db');
 const model = require('../model');
-const address = require('address');
+const Address = require('./address');
 
 const Model = model.Model;
-const Address = address.Address;
 
 class Partner extends Model {
   constructor() {
