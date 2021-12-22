@@ -12,8 +12,28 @@ class Role extends Model {
     this.type = type;
   }
 
+  addUser(user) {
+    if (this.users === undefined) {
+      this.users = [];
+    }
+
+    if (this.users.includes(user)) return;
+
+    this.users.push(user);
+  }
+
+  removeUser(user) {
+    if (this.users === undefined) return;
+
+    this.users = this.users.filter(u => u !== user);
+  }
+
   getType() {
     return this.type;
+  }
+
+  getUsers() {
+    return this.users;
   }
 
   async create() {

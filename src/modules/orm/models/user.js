@@ -48,6 +48,22 @@ class User extends Model {
     this.addresses = this.addresses.filter(addr => addr !== address)
   }
 
+  addRole(role) {
+    if (this.roles === undefined) {
+      this.roles = [];
+    }
+
+    if (this.roles.includes(role)) return;
+
+    this.roles.push(role);
+  }
+
+  removeRole(role) {
+    if (this.roles === undefined) return;
+
+    this.roles = this.roles.filter(r => r !== role);
+  }
+
   getFirstName () {
     return this.firstName
   }
@@ -67,9 +83,13 @@ class User extends Model {
   getCredentials () {
     return this.credentials
   }
-  // NOTE: This is table customer_addresses
+
   getAddresses () {
     return this.addresses
+  }
+
+  getRoles() {
+    return this.roles;
   }
 
   async create () {

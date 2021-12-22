@@ -54,6 +54,22 @@ class Coupon extends Model {
     this.code = code;
   }
 
+  addOrder(order) {
+    if (this.orders === undefined) {
+      this.orders = [];
+    }
+
+    if (this.orders.includes(order)) return;
+
+    this.orders.push(order);
+  }
+
+  removeOrder(order) {
+    if (this.orders === undefined) return;
+
+    this.orders = this.orders.filter(o => o !== order);
+  }
+
   getTitle() {
     return this.title;
   }
@@ -88,6 +104,10 @@ class Coupon extends Model {
 
   getCode() {
     return this.code;
+  }
+
+  getOrders() {
+    return this.orders;
   }
 
   async create() {

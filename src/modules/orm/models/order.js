@@ -41,6 +41,22 @@ class Order extends Model {
     this.valueWithDiscount = valueWithDiscount;
   }
   
+  addCoupon(coupon) {
+    if (this.coupons === undefined) {
+      this.coupons = [];
+    }
+
+    if (this.coupons.includes(coupon)) return;
+
+    this.coupons.push(coupon);
+  }
+
+  removeCoupon(coupon) {
+    if (this.coupons === undefined) return;
+
+    this.coupons = this.coupons.filter(c => c !== coupon);
+  }
+
   getDate() {
     return this.date;
   }
@@ -63,6 +79,10 @@ class Order extends Model {
 
   getValueWithDiscount() {
     return this.valueWithDiscount;
+  }
+
+  getCoupons() {
+    return this.coupons;
   }
 
   async create() {
