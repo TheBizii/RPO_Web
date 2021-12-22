@@ -13,34 +13,6 @@ async function connectToDB () {
   })
 }
 
-async function confirmLoginInformation (username, password) {
-  try {
-    await connectToDB()
-    const query = await promisify(connection.query).bind(connection)
-    const result = await query(`SELECT * FROM credentials WHERE username = "${username}" AND password = "${password}" AND active = 1`)
-    if (result.length === 0) {
-      return null
-    }
-    return JSON.stringify(result)
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-async function getSaltForLogin (username) {
-  try {
-    await connectToDB()
-    const query = await promisify(connection.query).bind(connection)
-    const result = await query(`SELECT salt FROM credentials WHERE username = "${username}" AND active = 1`)
-    if (result.length === 0) {
-      return null
-    }
-    return JSON.stringify(result)
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 async function getAllShops () {
   try {
     await connectToDB()
@@ -81,8 +53,6 @@ async function query (qry) {
 }
 
 module.exports = {
-  confirmLoginInformation,
-  getSaltForLogin,
   getAllShops,
   updateCoordinates,
   query
