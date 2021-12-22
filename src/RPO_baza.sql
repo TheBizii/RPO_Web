@@ -102,7 +102,7 @@ CONSTRAINT `FK_134` FOREIGN KEY `fkIdx_136` (`country_id`) REFERENCES `country` 
 CREATE TABLE `address`
 (
  `address` varchar(45) NOT NULL ,
- `coordinate` POINT,
+ `coordinates` POINT,
  `post_id` integer NOT NULL ,
  `ID`      integer NOT NULL AUTO_INCREMENT ,
  `active`     tinyint NOT NULL ,
@@ -393,7 +393,7 @@ VALUES
 	('Celje', 1, 1);
 
 INSERT INTO
-	address (address, coordinate, post_id, active)
+	address (address, coordinates, post_id, active)
 VALUES
 	('Koreno 78', NULL, 1, 1),
 	('Kolodvorska ulica 178', NULL, 1, 1),
