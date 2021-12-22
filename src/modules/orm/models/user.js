@@ -98,6 +98,11 @@ class User extends Model {
       const sql = `INSERT INTO user (first_name, middle_name, last_name, phone, credentials_id, active) VALUES ("${this.getFirstName()}", "${this.getMiddleName()}", "${this.getLastName()}", "${this.getPhone()}", "${this.getCredentials().getID()}", 1);`
       const res = await db.query(sql)
       this.setID(res.insertId)
+
+      for(let i = 0; i < this.getRoles().length; i++) {
+        const rolesql = `INSERT INTO user_role (user_id, role_id, active) VALUES (${ this.getID() }, ${ this.getRoles()[i] }, 1);`;
+        await db.query(rolesql);
+      }
       return res
     } catch (err) {
       console.log(err)
