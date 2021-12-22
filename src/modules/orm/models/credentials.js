@@ -20,6 +20,18 @@ class Credentials extends Model {
     this.salt = salt
   }
 
+  getUsername() {
+    return this.username;
+  }
+
+  getPassword() {
+    return this.password;
+  }
+
+  getSalt() {
+    return this.salt;
+  }
+
   async create () {
     try {
       this.setActive(true)
