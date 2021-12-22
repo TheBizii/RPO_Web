@@ -208,7 +208,7 @@ class User extends Model {
 
       if (rolesToRemove.length > 0) {
         const remrolesql = `UPDATE user_role SET active=0 WHERE role_id IN (${rolesToRemove.join()}) AND user_id=${this.getID()};`
-        await db.query(rolesToRemove)
+        await db.query(remrolesql)
       }
 
       return JSON.stringify(res)
