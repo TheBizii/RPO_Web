@@ -214,8 +214,8 @@ class User extends Model {
       const rolesRes = await db.query(rolesql)
       const rolesToRemove = []
       for (let i = 0; i < rolesRes.length; i++) {
-        if (!this.roles.contains(rolesRes[i])) {
-          rolesToRemove.push(rolesRes[i])
+        if (!this.roles.contains(rolesRes[i].role_id)) {
+          rolesToRemove.push(rolesRes[i].role_id)
         }
       }
 
