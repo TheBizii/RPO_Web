@@ -62,6 +62,11 @@ class Address extends Model {
       let sql = `INSERT INTO address (address, coordinates, post_id, active) VALUES ("${ this.getAddress() }", POINT(${ this.getCoordinates().x }, ${ this.getCoordinates().y }), "${ this.getPost().getID() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
+      
+      for(let i = 0; i < this.getUsers().length; i++) {
+        const addressql = `INSERT INTO customer_address (user_id, address_id, active) VALUES (${ this.getUsers()[i] }, ${ this.getID() }, 1);`;
+        await db.query(addressql);
+      }
       return res;
     } catch(err) {
       console.log(err);
@@ -82,6 +87,14 @@ class Address extends Model {
         this.setCoordinates(address.coordinates);
         this.setPost(post);
         this.setActive(address.active);
+
+        // Load users
+        const usersql = `SELECT user_id FROM customer_address WHERE address_id="${id}" AND active <> 0;`
+        const usersRes = await db.query(usersql)
+        for (let i = 0; i < usersRes.length; i++) {
+          this.addUser(usersRes[i].user_id)
+        }
+
         return this;
       }
     } catch(err) {
@@ -113,6 +126,21 @@ class Address extends Model {
     try {
       let sql = `UPDATE address SET address="${ this.getAddress() }", coordinates=POINT(${ this.getCoordinates().x }, ${ this.getCoordinates().y }), post_id="${ this.getPost().getID() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
+
+      // Check if any users have to be deleted
+      const usersql = `SELECT user_id FROM customer_address WHERE address_id="${this.getID()}" AND active <> 0;`
+      const usersRes = await db.query(usersql)
+      const usersToRemove = []
+      for (let i = 0; i < usersRes.length; i++) {
+        if (!this.users.includes(usersRes[i].user_id)) {
+          usersToRemove.push(usersRes[i].user_id)
+        }
+      }
+
+      if (usersToRemove.length > 0) {
+        const remusersql = `UPDATE customer_address SET active=0 WHERE user_id IN (${usersToRemove.join()}) AND address_id=${this.getID()};`
+        await db.query(remusersql)
+      }
       return JSON.stringify(res);
     } catch(err) {
       console.log(err);

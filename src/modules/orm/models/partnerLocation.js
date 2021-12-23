@@ -67,6 +67,11 @@ class PartnerLocation extends Model {
       let sql = `INSERT INTO partner_location (address_id, partner_id, title, active) VALUES ("${ this.getAddress().getID() }", "${ this.getPartner().getID() }", "${ this.getTitle() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
+
+      for(let i = 0; i < this.getGoods().length; i++) {
+        const goodsql = `INSERT INTO partner_location_goods (partner_location_id, goods_id, active) VALUES (${ this.getID() }, ${ this.getGoods()[i] }, 1);`;
+        await db.query(goodsql);
+      }
       return res;
     } catch(err) {
       console.log(err);
@@ -89,6 +94,14 @@ class PartnerLocation extends Model {
         this.setAddress(address);
         this.setPartner(partner);
         this.setActive(loc.active);
+        
+        // Load goods
+        const goodsql = `SELECT goods_id FROM partner_location_goods WHERE partner_location_goods_id="${loc.ID}" AND active <> 0;`
+        const goodsRes = await db.query(goodsql)
+        for (let i = 0; i < goodsRes.length; i++) {
+          this.addGoods(goodsRes[i].goods_id)
+        }
+
         return this;
       }
     } catch(err) {
@@ -120,6 +133,21 @@ class PartnerLocation extends Model {
     try {
       let sql = `UPDATE partner_location SET address_id="${ this.getAddress().getID() }", partner_id="${ this.getPartner().getID() }", title="${ this.getTitle() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
+
+      // Check if any goods have to be deleted
+      const goodsql = `SELECT goods_id FROM partner_location_goods WHERE partner_location_id="${this.getID()}" AND active <> 0;`
+      const goodsRes = await db.query(goodsql)
+      const goodsToRemove = []
+      for (let i = 0; i < goodsRes.length; i++) {
+        if (!this.goods.includes(goodsRes[i].goods_id)) {
+          goodsToRemove.push(goodsRes[i].goods_id)
+        }
+      }
+
+      if (goodsToRemove.length > 0) {
+        const remgoodsql = `UPDATE partner_location_goods SET active=0 WHERE goods_id IN (${goodsToRemove.join()}) AND partner_location_id=${this.getID()};`
+        await db.query(remgoodsql)
+      }
       return JSON.stringify(res);
     } catch(err) {
       console.log(err);

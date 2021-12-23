@@ -209,6 +209,22 @@ class User extends Model {
       const sql = `UPDATE user SET first_name="${this.getFirstName()}", middle_name="${this.getMiddleName()}", last_name="${this.getLastName()}", phone="${this.getPhone()}", credentials_id="${this.getCredentials().getID()}", active="${this.getActive()}" WHERE ID=${this.getID()};`
       const res = await db.query(sql)
 
+      // Check if any addresses have to be deleted
+      const addressql = `SELECT address_id FROM customer_address WHERE user_id="${this.getID()}" AND active <> 0;`
+      const addressRes = await db.query(addressql)
+      const addressesToRemove = []
+      for (let i = 0; i < addressRes.length; i++) {
+        if (!this.addresses.includes(addressRes[i].address_id)) {
+          addressesToRemove.push(addressRes[i].address_id)
+        }
+      }
+
+      if (addressesToRemove.length > 0) {
+        const remaddressql = `UPDATE customer_address SET active=0 WHERE address_id IN (${addressesToRemove.join()}) AND user_id=${this.getID()};`
+        await db.query(remaddressql)
+      }
+
+
       // Check if any roles have to be deleted
       const rolesql = `SELECT role_id FROM user_role WHERE user_id="${this.getID()}" AND active <> 0;`
       const rolesRes = await db.query(rolesql)

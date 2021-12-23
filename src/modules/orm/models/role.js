@@ -42,6 +42,11 @@ class Role extends Model {
       let sql = `INSERT INTO role (type, active) VALUES ("${ this.getType() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
+
+      for(let i = 0; i < this,getUsers().length; i++) {
+        const usersql = `INSERT INTO user_role (user_id, role_id, active) VALUES (${ this.getUsers()[i] }, ${ this.getID() }, 1);`;
+        await db.query(usersql);
+      }
       return res;
     } catch(err) {
       console.log(err);
@@ -58,6 +63,13 @@ class Role extends Model {
         this.setID(role.ID);
         this.setType(role.type);
         this.setActive(role.active);
+
+        // Load users
+        const usersql = `SELECT user_id FROM user_role WHERE role_id="${ this.getID() } AND active <> 0;"`;
+        const usersRes = await db.query(usersql);
+        for(let i = 0; i < usersRes.length; i++) {
+          this.addUser(usersRes[i].user_id);
+        }
         return this;
       }
     } catch(err) {
@@ -89,6 +101,22 @@ class Role extends Model {
     try {
       let sql = `UPDATE role SET type="${ this.getType() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
+
+      // Check if any users have to be deleted
+      const usersql = `SELECT user_id FROM user_role WHERE role_id="${ this.getID() }" AND active <> 0;`;
+      const usersRes = await db.query(usersql);
+      const usersToRemove = [];
+      for (let i = 0; i < usersRes.length; i++) {
+        if (!this.users.includes(usersRes[i].user_id)) {
+          usersToRemove.push(usersRes[i].user_id);
+        }
+      }
+
+      if (usersToRemove.length > 0) {
+        const remusersql = `UPDATE user_role SET active=0 WHERE user_id IN (${ usersToRemove.join() }) AND role_id=${ this.getID() };`;
+        await db.query(remusersql);
+      }
+
       return JSON.stringify(res);
     } catch(err) {
       console.log(err);

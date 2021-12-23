@@ -91,6 +91,12 @@ class Order extends Model {
       let sql = `INSERT INTO order (date, deliverer_id, customer_id, total_value, total_discount_percentage, value_with_discount, active) VALUES ("${ this.getDate() }", "${ this.getDeliverer().getID() }", "${ this.getCustomer().getID() }", "${ this.getTotalValue() }", "${ this.getTotalDiscountPercentage() }", "${ this.getValueWithDiscount() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
+      
+      for(let i = 0; i < this.getCoupons().length; i++) {
+        const couponsql = `INSERT INTO used_coupons (order_id, coupon_id, active) VALUES (${ this.getID() }, ${ this.getCoupons()[i] }, 1);`;
+        await db.query(couponsql);
+      }
+      
       return res;
     } catch(err) {
       console.log(err);
@@ -116,6 +122,14 @@ class Order extends Model {
         this.setTotalDiscountPercentage(order.total_discount_percentage);
         this.setValueWithDiscount(order.value_with_discount);
         this.setActive(order.active);
+
+        // Load coupons
+        const couponsql = `SELECT coupon_id FROM used_coupons WHERE order_id="${order.ID}" AND active <> 0;`
+        const couponsRes = await db.query(couponsql)
+        for (let i = 0; i < couponsRes.length; i++) {
+          this.addCoupon(couponsRes[i].coupon_id)
+        }
+        
         return this;
       }
     } catch(err) {
@@ -147,6 +161,22 @@ class Order extends Model {
     try {
       let sql = `UPDATE order SET date="${ this.getDate() }", deliverer_id="${ this.getDeliverer().getID() }", customer_id="${ this.getCustomer().getID() }", total_value="${ this.getTotalValue() }" total_discount_percentage="${ this.getTotalDiscountPercentage() }", value_with_discount="${ this.getValueWithDiscount() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
+
+      // Check if any coupons have to be deleted
+      const couponsql = `SELECT coupon_id FROM used_coupons WHERE order_id="${this.getID()}" AND active <> 0;`
+      const couponsRes = await db.query(couponsql)
+      const couponsToRemove = []
+      for (let i = 0; i < couponsRes.length; i++) {
+        if (!this.coupon.includes(couponsRes[i].coupon_id)) {
+          couponsToRemove.push(couponsRes[i].coupon_id)
+        }
+      }
+
+      if (couponsToRemove.length > 0) {
+        const remcouponsql = `UPDATE used_coupons SET active=0 WHERE coupon_id IN (${couponsToRemove.join()}) AND order_id=${this.getID()};`
+        await db.query(remcouponsql)
+      }
+
       return JSON.stringify(res);
     } catch(err) {
       console.log(err);

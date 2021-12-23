@@ -61,6 +61,11 @@ class Category extends Model {
       let sql = `INSERT INTO category (title, parent_category_id, image_url, active) VALUES ("${ this.getTitle() }", "${ this.getParentCategory().getID() }", "${ this.getImageUrl() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
+
+      for(let i = 0; i < this.getGoods().length; i++) {
+        const goodsql = `INSERT INTO goods_category (category_id, goods_id, active) VALUES (${ this.getID() }, ${ this.getGoods()[i] }, 1);`;
+        await db.query(goodsql);
+      }
       return res;
     } catch(err) {
       console.log(err);
@@ -81,6 +86,13 @@ class Category extends Model {
         this.setParentCategory(parentCategory);
         this.setImageUrl(category.image_url);
         this.setActive(category.active);
+
+        // Load goods
+        const goodsql = `SELECT goods_id FROM goods_category WHERE category_id="${category.ID}" AND active <> 0;`
+        const goodsRes = await db.query(goodsql)
+        for (let i = 0; i < goodsRes.length; i++) {
+          this.addGoods(goodsRes[i].goods_id)
+        }
         return this;
       }
     } catch(err) {
@@ -112,6 +124,21 @@ class Category extends Model {
     try {
       let sql = `UPDATE category SET title="${ this.getTitle() }", parent_category_id="${ this.getParentCategory().getID() }", image_url="${ this.getImageUrl() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
+
+      // Check if any goods have to be deleted
+      const goodsql = `SELECT goods_id FROM goods_category WHERE category_id="${this.getID()}" AND active <> 0;`
+      const goodsRes = await db.query(goodsql)
+      const goodsToRemove = []
+      for (let i = 0; i < goodsRes.length; i++) {
+        if (!this.goods.includes(goodsRes[i].goods_id)) {
+          goodsToRemove.push(goodsRes[i].goods_id)
+        }
+      }
+
+      if (goodsToRemove.length > 0) {
+        const remgoodsql = `UPDATE goods_category SET active=0 WHERE goods_id IN (${goodsToRemove.join()}) AND category_id=${this.getID()};`
+        await db.query(remgoodsql)
+      }
       return JSON.stringify(res);
     } catch(err) {
       console.log(err);
