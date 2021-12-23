@@ -40,7 +40,7 @@ class Credentials extends Model {
       this.setID(res.insertId)
       return res
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
     return null
   }
@@ -59,7 +59,7 @@ class Credentials extends Model {
         return this
       }
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
 
     return null
@@ -79,7 +79,7 @@ class Credentials extends Model {
         return this
       }
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
     return null
   }
@@ -96,7 +96,7 @@ class Credentials extends Model {
       }
       return allCredentials
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
 
     return null
@@ -108,7 +108,7 @@ class Credentials extends Model {
       const res = await db.query(sql)
       return JSON.stringify(res)
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
   }
 

@@ -24,7 +24,7 @@ class State extends Model {
       this.setID(res.insertId);
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -41,7 +41,7 @@ class State extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -59,7 +59,7 @@ class State extends Model {
       }
       return states;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -71,7 +71,7 @@ class State extends Model {
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

@@ -68,7 +68,7 @@ class Category extends Model {
       }
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -96,7 +96,7 @@ class Category extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -114,7 +114,7 @@ class Category extends Model {
       }
       return categories;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -141,7 +141,7 @@ class Category extends Model {
       }
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

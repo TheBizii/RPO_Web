@@ -49,7 +49,7 @@ class Role extends Model {
       }
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -73,7 +73,7 @@ class Role extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -91,7 +91,7 @@ class Role extends Model {
       }
       return roles;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -119,7 +119,7 @@ class Role extends Model {
 
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

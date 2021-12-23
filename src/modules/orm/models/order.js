@@ -99,7 +99,7 @@ class Order extends Model {
       
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -133,7 +133,7 @@ class Order extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -151,7 +151,7 @@ class Order extends Model {
       }
       return orders;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -179,7 +179,7 @@ class Order extends Model {
 
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

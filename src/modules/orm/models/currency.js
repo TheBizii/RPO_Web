@@ -40,7 +40,7 @@ class Currency extends Model {
       this.setID(res.insertId);
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -59,7 +59,7 @@ class Currency extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -77,7 +77,7 @@ class Currency extends Model {
       }
       return currencies;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -89,7 +89,7 @@ class Currency extends Model {
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

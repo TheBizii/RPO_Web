@@ -110,7 +110,7 @@ class Goods extends Model {
       
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -147,7 +147,7 @@ class Goods extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -165,7 +165,7 @@ class Goods extends Model {
       }
       return allGoods;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -207,7 +207,7 @@ class Goods extends Model {
       }
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

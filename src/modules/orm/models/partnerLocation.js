@@ -74,7 +74,7 @@ class PartnerLocation extends Model {
       }
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -105,7 +105,7 @@ class PartnerLocation extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -123,7 +123,7 @@ class PartnerLocation extends Model {
       }
       return locs;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -150,7 +150,7 @@ class PartnerLocation extends Model {
       }
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

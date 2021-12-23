@@ -66,7 +66,7 @@ class OrderedGoods extends Model {
       this.setID(res.insertId);
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -89,7 +89,7 @@ class OrderedGoods extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -107,7 +107,7 @@ class OrderedGoods extends Model {
       }
       return orderedGoodsArr;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -119,7 +119,7 @@ class OrderedGoods extends Model {
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

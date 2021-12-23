@@ -123,7 +123,7 @@ class Coupon extends Model {
       }
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -160,7 +160,7 @@ class Coupon extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -178,7 +178,7 @@ class Coupon extends Model {
       }
       return coupons;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -205,7 +205,7 @@ class Coupon extends Model {
       }
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

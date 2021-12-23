@@ -38,7 +38,7 @@ class Post extends Model {
       this.setID(res.insertId);
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -58,7 +58,7 @@ class Post extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -76,7 +76,7 @@ class Post extends Model {
       }
       return posts;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -88,7 +88,7 @@ class Post extends Model {
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

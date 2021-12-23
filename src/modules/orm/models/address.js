@@ -69,7 +69,7 @@ class Address extends Model {
       }
       return res;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
     return null;
   }
@@ -98,7 +98,7 @@ class Address extends Model {
         return this;
       }
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -116,7 +116,7 @@ class Address extends Model {
       }
       return addresses;
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
 
     return null;
@@ -143,7 +143,7 @@ class Address extends Model {
       }
       return JSON.stringify(res);
     } catch(err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 

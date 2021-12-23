@@ -105,7 +105,7 @@ class User extends Model {
       }
       return res
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
     return null
   }
@@ -143,7 +143,7 @@ class User extends Model {
         return this
       }
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
     return null
   }
@@ -182,7 +182,7 @@ class User extends Model {
         return resUser
       }
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
     return null
   }
@@ -199,7 +199,7 @@ class User extends Model {
       }
       return users
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
     return null
   }
@@ -242,7 +242,7 @@ class User extends Model {
 
       return JSON.stringify(res)
     } catch (err) {
-      console.log(err)
+      throw new Error(err)
     }
   }
 
