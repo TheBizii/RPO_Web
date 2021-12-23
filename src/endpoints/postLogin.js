@@ -10,8 +10,7 @@ router.post('/login', async function (req, res) {
       throw new Error()
     }
     const sha256 = crypto.createHash('sha256')
-    const user = new User()
-    await user.readByUsername(req.body.username)
+    const user = await User.readByUsername(req.body.username)
     const hash = sha256.update(`${req.body.password}${user.credentials.salt}`).digest('hex')
     if (user.credentials.password === hash.toUpperCase()) {
       res.json({
