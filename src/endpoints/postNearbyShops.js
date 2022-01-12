@@ -38,7 +38,7 @@ router.post('/nearbyShops', async function (req, res) {
       } else {
         coord.push({ latitude: branch.getAddress().getCoordinates().x, longitude: branch.getAddress().getCoordinates().y })
       }
-      resArr.push({ lat: coord[0].latitude, lon: coord[0].longitude, dis: Math.floor(measure(coord[0].latitude, coord[0].longitude, req.body.lat, req.body.lng) * 100) / 100, name: branch.getTitle() })
+      resArr.push({ lat: coord[0].latitude, lon: coord[0].longitude, dis: Math.floor(measure(coord[0].latitude, coord[0].longitude, req.body.lat, req.body.lng) * 100) / 100, name: branch.getTitle(), id: branch.ID })
     }
     resArr.sort((a, b) => a.dis - b.dis)
     res.json({

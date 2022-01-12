@@ -11,6 +11,7 @@ const getCountry = require('./endpoints/getCountry')
 const postNearbyShops = require('./endpoints/postNearbyShops')
 const postLogin = require('./endpoints/postLogin')
 const postRegister = require('./endpoints/postRegister')
+const getShop = require('./endpoints/getShop')
 const db = require('./modules/db')
 
 async function main () {
@@ -41,6 +42,7 @@ async function main () {
   app.use('/API/', postLogin)
   app.use('/API/', postRegister)
   app.use('/API/', postNearbyShops)
+  app.use('/API/', getShop)
   app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
