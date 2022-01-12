@@ -6,12 +6,13 @@ const crypto = require('crypto')
 router.post('/login', async function (req, res) {
   try {
     res.setHeader('Content-Type', 'application/json')
-    if (req.body.username === undefined && req.body.password === undefined && req.body.password.length !== 64) {
+    if (req.body.username === undefined || req.body.password === undefined || req.body.password.length !== 64) {
       throw new Error()
     }
     const sha256 = crypto.createHash('sha256')
     const user = await User.readByUsername(req.body.username)
     const hash = sha256.update(`${req.body.password}${user.credentials.salt}`).digest('hex')
+    console.log(`hashing: ${req.body.password}${user.credentials.salt} => ${hash}`)
     if (user.credentials.password === hash.toUpperCase()) {
       res.json({
         message: 'OK'

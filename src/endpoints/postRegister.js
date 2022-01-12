@@ -5,7 +5,7 @@ const Credentials = require('../modules/orm/models/credentials')
 const User = require('../modules/orm/models/user')
 
 function returnHash () {
-  const val = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQRSTUVWXYZ1234567890*?=)(/%$!~\\<>-—'.split('')
+  const val = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQRSTUVWXYZ1234567890*?=)(/%$!~<>-—'.split('')
   let str = ''
   for (let i = 0; i < 32; i++) {
     str += val[Math.floor(Math.random() * val.length)]
@@ -31,7 +31,10 @@ router.post('/register', async function (req, res) {
     const salt = returnHash()
     cred.setSalt(salt)
     const sha256 = crypto.createHash('sha256')
-    const hash = sha256.update(`${req.body.password}${salt}`).digest('hex')
+    const sha256pass = crypto.createHash('sha256')
+    const pass = sha256pass.update(req.body.password).digest('hex')
+    const hash = sha256.update(`${pass.toUpperCase()}${salt}`).digest('hex')
+    console.log(`hashing: ${pass.toUpperCase()}${salt} => ${hash}`)
     cred.setPassword(hash.toUpperCase())
     const response = await cred.create()
     if (response == null) {
