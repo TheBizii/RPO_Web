@@ -96,7 +96,7 @@ class PartnerLocation extends Model {
         this.setActive(loc.active);
         
         // Load goods
-        const goodsql = `SELECT goods_id FROM partner_location_goods WHERE partner_location_goods_id="${loc.ID}" AND active <> 0;`
+        const goodsql = `SELECT goods_id FROM partner_location_goods WHERE partner_location_id="${loc.ID}" AND active <> 0;`
         const goodsRes = await db.query(goodsql)
         for (let i = 0; i < goodsRes.length; i++) {
           this.addGoods(goodsRes[i].goods_id)
