@@ -193,7 +193,7 @@ CREATE TABLE `order`
 (
  `ID`                        integer NOT NULL AUTO_INCREMENT ,
  `date`                      datetime NOT NULL ,
- `deliverer_id`              integer NOT NULL ,
+ `deliverer_id`              integer NULL ,
  `customer_id`               integer NOT NULL ,
  `total_value`               double NOT NULL ,
  `total_discount_percentage` double NOT NULL ,
