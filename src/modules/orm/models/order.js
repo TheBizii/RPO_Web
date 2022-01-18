@@ -88,7 +88,7 @@ class Order extends Model {
   async create () {
     try {
       this.setActive(true)
-      const sql = `INSERT INTO order (date, deliverer_id, customer_id, total_value, total_discount_percentage, value_with_discount, active) VALUES ("${this.getDate()}", "${this.getDeliverer().getID()}", "${this.getCustomer().getID()}", "${this.getTotalValue()}", "${this.getTotalDiscountPercentage()}", "${this.getValueWithDiscount()}", 1);`
+      const sql = `INSERT INTO order (date, customer_id, total_value, total_discount_percentage, value_with_discount, active) VALUES ("${this.getDate()}", "${this.getCustomer().getID()}", "${this.getTotalValue()}", "${this.getTotalDiscountPercentage()}", "${this.getValueWithDiscount()}", 1);`
       const res = await db.query(sql)
       this.setID(res.insertId)
 
@@ -101,7 +101,6 @@ class Order extends Model {
     } catch (err) {
       throw new Error(err)
     }
-    return null
   }
 
   async read (id) {
@@ -153,8 +152,6 @@ class Order extends Model {
     } catch (err) {
       throw new Error(err)
     }
-
-    return null
   }
 
   async update () {
