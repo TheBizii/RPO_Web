@@ -139,6 +139,18 @@ class Order extends Model {
     return null
   }
 
+  static async readUserOrders (id) {
+    try {
+      const sql = `SELECT * FROM order o JOIN user u ON u.ID = o.customer_id WHERE u.ID = ${id} AND u.active <> 0 AND o.active <> 0;`
+      const res = await db.query(sql)
+      if (res.length > 0) {
+        return res
+      }
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
   static async readAll () {
     try {
       const sql = 'SELECT ID FROM order WHERE active <> 0'

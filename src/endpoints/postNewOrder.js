@@ -32,8 +32,6 @@ router.post('/newOrder', async (req, res) => {
     for (const item of req.body.items) {
       const goods = new Goods()
       const tmp = await goods.read(item.id)
-      console.log(goods.price)
-      console.log(item.quantity)
       if (tmp == null) {
         throw new Error()
       }
@@ -44,7 +42,6 @@ router.post('/newOrder', async (req, res) => {
       orderedGoods.setAmount(item.quantity)
       orderedGoods.setTotalValue(goods.price * item.quantity)
       calcSum += goods.price * item.quantity
-      console.log(calcSum)
     }
     if (Math.floor(req.body.totalPrice * 100) / 100 !== Math.floor(calcSum * 100) / 100) {
       throw new Error(`Server thinks ${calcSum}, but device thinks ${req.body.totalPrice}`)
@@ -61,7 +58,6 @@ router.post('/newOrder', async (req, res) => {
       message: 'OK'
     })
   } catch (err) {
-    console.log(err)
     res.json({
       error: 'Something went wrong with newOrder'
     })
