@@ -46,6 +46,8 @@ async function main () {
   app.use('/API/', postNearbyShops)
   app.use('/API/', getShop)
   app.use('/API/', postNewOrder)
+  app.use('/API/', postStoreGoods)
+  app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
       if (err.message !== undefined) {
