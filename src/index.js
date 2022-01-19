@@ -12,11 +12,8 @@ const postNearbyShops = require('./endpoints/postNearbyShops')
 const postLogin = require('./endpoints/postLogin')
 const postRegister = require('./endpoints/postRegister')
 const getShop = require('./endpoints/getShop')
-<<<<<<< Updated upstream
 const postNewOrder = require('./endpoints/postNewOrder')
-=======
->>>>>>> Stashed changes
-const postStoreGoods = require('./endpoints/postStoreGoods');
+const postStoreGoods = require('./endpoints/postStoreGoods')
 const db = require('./modules/db')
 
 async function main () {
@@ -48,12 +45,7 @@ async function main () {
   app.use('/API/', postRegister)
   app.use('/API/', postNearbyShops)
   app.use('/API/', getShop)
-<<<<<<< Updated upstream
   app.use('/API/', postNewOrder)
-=======
->>>>>>> Stashed changes
-  app.use('/API/', postStoreGoods);
-  app.use(async function (err, req, res, next) {
     try {
       let resObj = { error: 'generic' }
       if (err.message !== undefined) {
