@@ -99,15 +99,14 @@ class User extends Model {
       const res = await db.query(sql)
       this.setID(res.insertId)
 
-      for(let i = 0; i < this.getRoles().length; i++) {
-        const rolesql = `INSERT INTO user_role (user_id, role_id, active) VALUES (${ this.getID() }, ${ this.getRoles()[i] }, 1);`;
-        await db.query(rolesql);
+      for (let i = 0; i < this.getRoles().length; i++) {
+        const rolesql = `INSERT INTO user_role (user_id, role_id, active) VALUES (${this.getID()}, ${this.getRoles()[i]}, 1);`
+        await db.query(rolesql)
       }
       return res
     } catch (err) {
       throw new Error(err)
     }
-    return null
   }
 
   async read (id) {
@@ -173,7 +172,7 @@ class User extends Model {
         }
 
         // Load roles
-        const rolesql = `SELECT role_id FROM user_role WHERE user_id="${ user.ID }" AND active <> 0;`
+        const rolesql = `SELECT role_id FROM user_role WHERE user_id="${user.ID}" AND active <> 0;`
         const rolesRes = await db.query(rolesql)
         for (let i = 0; i < rolesRes.length; i++) {
           resUser.addRole(rolesRes[i].role_id)
@@ -201,7 +200,6 @@ class User extends Model {
     } catch (err) {
       throw new Error(err)
     }
-    return null
   }
 
   async update () {
@@ -223,7 +221,6 @@ class User extends Model {
         const remaddressql = `UPDATE customer_address SET active=0 WHERE address_id IN (${addressesToRemove.join()}) AND user_id=${this.getID()};`
         await db.query(remaddressql)
       }
-
 
       // Check if any roles have to be deleted
       const rolesql = `SELECT role_id FROM user_role WHERE user_id="${this.getID()}" AND active <> 0;`
