@@ -3,6 +3,7 @@
 <head>
 <title>Bolt</title>
 <script src="jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
@@ -41,27 +42,30 @@
 </div>
 
 <div id="intro" class="flex-parent-intro">
-  <div class="intro-box-logo"> <img src="pictures/temp.jpg" alt="logo" class="logo-intro"> </div>
-  <div class="intro-box-moto"> moto moto moto moto moto moto moto moto moto moto moto moto moto moto moto moto </div>
+  <div class="intro-box-logo"> <img src="pictures/logo.png" alt="logo" class="logo-intro"> </div>
+  <div class="intro-box-moto"> </div>
 </div>
 
 <div class="flex-parent">
-  <a href="./store.html" class="box">
-
+  <a href="./store.html" onclick="getShopName(0)" class="box">
+    <img src="" alt="" id="shop0">
+    <h1 class="shopname" id="shopname0"></h1>
   </a>
-  <a href="./store.html" class="box">
-
+  <a href="./store.html" onclick="getShopName(1)" class="box">
+    <img src="" alt="" id="shop1">
+    <h1 class="shopname" id="shopname1"></h1>
   </a>
-  <a href="./store.html" class="box">
-
+  <a href="./store.html" onclick="getShopName(2)" class="box">
+    <img src="" alt="" id="shop2">
+    <h1 class="shopname" id="shopname2"></h1>
   </a>
-  <a href="./store.html" class="box">
-
+  <a href="./store.html" onclick="getShopName(3)" class="box">
+    <img src="" alt="" id="shop3">
+    <h1 class="shopname" id="shopname3"></h1>
   </a>
 </div>
 
 <footer>
-  <p>Footer</p>
 </footer>
 
 <script src="app.js"></script>

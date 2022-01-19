@@ -1,8 +1,83 @@
 //header
-
 $(document).ready( function() {
-    $('#header').load("header.html");
+  $('#header').load(localStorage.getItem("header") || "header.html");
+  if (window.location.href == "http://localhost/RPO_Web/store.html" || window.location.href == "https://bolt.printeepro.com/store.html") {
+    let id = localStorage.getItem("clicked");
+    let shops = JSON.parse(localStorage.getItem("shops"));
+    let name = shops[id].name;
+    document.getElementById("storename").innerHTML = name;
+    document.getElementById("storelogo").src = shops[id].image;
+  }
+  else if (window.location.href == "http://localhost/RPO_Web/index.html") {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getlocation);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
 });
+
+//connection with database
+//login
+async function submitForm(e) {
+ e.preventDefault();
+ const username = $("#txt_uname").val().trim();
+ const password = $("#txt_pwd").val().trim();
+ const msgBuffer = new TextEncoder().encode(password);
+ const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+ const hashArray = Array.from(new Uint8Array(hashBuffer));
+ const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+ if( username != "" && hashHex.toUpperCase() != "" ){
+     $.ajax({
+         url:'https://bolt.printeepro.com/API/login',
+         type:'post',
+         contentType: 'application/json',
+         data: JSON.stringify({username:username,password:hashHex.toUpperCase()}),
+         success:function(response){
+             if(response.message == "OK"){
+                 document.getElementById('id01').style.display = "none";
+                 document.getElementById('loginb').style.display = "none";
+                 document.getElementById('settingsdrop').style.display = "block";
+                 localStorage.setItem("name", username);
+                 localStorage.setItem("header", "headerLog.html");
+             }
+         }
+     });
+   }
+ return false;
+}
+
+async function getlocation(position) {
+  let longitude = position.coords.latitude;
+  let latitude = position.coords.longitude;
+ if( latitude != "" && longitude != "" ){
+     $.ajax({
+         url:'https://bolt.printeepro.com/API/nearbyShops',
+         type:'post',
+         contentType: 'application/json',
+         data: JSON.stringify({lat:latitude,lng:longitude}),
+         success:function(response){
+             if(response.shops != undefined){
+             localStorage.setItem("shops", JSON.stringify(response.shops));
+               localStorage.setItem("latitude", latitude);
+               localStorage.setItem("longitude", longitude);
+               //document.getElementById("shop1").src = "./pictures/mac.png";
+               let shops = response.shops;
+               for (var i = 0; i < 4; i++) {
+                 let name = shops[i].name;
+                 let image = shops[i].image;
+                 let idbox = "shop" + i;
+                 let nameshop = "shopname" + i;
+                 document.getElementById(idbox).src = "" + image;
+                 document.getElementById(idbox).style.width = "400px";
+                 document.getElementById(idbox).style.height = "400px";
+                 document.getElementById(nameshop).innerHTML = name;
+               }
+             }
+         }
+     });
+   }
+}
 
 // sidebar
 function openNav() {
@@ -15,99 +90,17 @@ function closeNav() {
   document.getElementById("body").style.marginLeft = "0";
 }
 
-//settings
-//user info
-document.getElementById("uinfoopen").onclick = function() {
-  console.log("im here user");
-  document.getElementById("uinfo-modal").style.display = "block";
+function clearSt() {
+  console.log("cleared");
+  localStorage.clear();
 }
 
-document.getElementById("closemu").onclick = function() {
-  console.log("closebybutton user");
-  document.getElementById("uinfo-modal").style.display = "none";
+function getShopName(number) {
+  localStorage.setItem("clicked", number);
 }
-
-//paying iinfo
-document.getElementById("pinfoopen").onclick = function() {
-  console.log("im here paying");
-  document.getElementById("pinfo-modal").style.display = "block";
-}
-
-document.getElementById("closemp").onclick = function() {
-  console.log("closebybutton paying");
-  document.getElementById("pinfo-modal").style.display = "none";
-}
-
-//location info
-document.getElementById("linfoopen").onclick = function() {
-  console.log("im here location");
-  document.getElementById("linfo-modal").style.display = "block";
-}
-
-document.getElementById("closeml").onclick = function() {
-  console.log("closebybutton location");
-  document.getElementById("linfo-modal").style.display = "none";
-}
-
-//account mode
-document.getElementById("pmodeopen").onclick = function() {
-  console.log("im here mode");
-  document.getElementById("pmode-modal").style.display = "block";
-}
-
-document.getElementById("closempmode").onclick = function() {
-  console.log("closebybutton mode");
-  document.getElementById("pmode-modal").style.display = "none";
-}
-
+//login modal close
 window.onclick = function(event) {
-  if (event.target == document.getElementById("uinfo-modal")) {
-    console.log("close user");
-    document.getElementById("uinfo-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById("pinfo-modal")) {
-    console.log("close paying");
-    document.getElementById("pinfo-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById("linfo-modal")) {
-      console.log("close location");
-      document.getElementById("linfo-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById("pmode-modal")) {
-    console.log("close mode");
-    document.getElementById("pmode-modal").style.display = "none";
-  }
-  else if (event.target == document.getElementById('id01')) {
+  if (event.target == document.getElementById('id01')) {
       document.getElementById('id01').style.display = "none";
   }
 }
-// function(){
-//   $(".set-box-uinfo").on("click", function(){
-//
-//     $(".modal-mask").css("display", "block");
-//     $(".modal-popup").css("display", "block");
-//
-//     // $(".modal-popup").animate({
-//     //    'width' : '80%',
-//     //    'left' : '10%'
-//     //    }, 200, "swing" , function(){
-//     //    $(".modal-popup").animate({
-//     //       'height' : '80%',
-//     //       'top' : '10%'
-//     //    }, 200, "swing", function(){});
-//     //   });
-//     }
-//
-//   $(document).on("keydown", function(event){
-//    if(event.keyCode === 27){
-//     $(".modal-mask").css("display", "");
-//        $(".modal-popup").css({
-//            "display": "",
-//            "width": "",
-//            "height": "",
-//            "top": "",
-//            "left": ""
-//        });
-//     }
-//   });
-// });

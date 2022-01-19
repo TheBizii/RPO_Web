@@ -38,6 +38,10 @@ body {
   border: none;
 }
 
+#settingsdrop {
+  display: none;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -49,7 +53,7 @@ body {
   right: 0;
 }
 
-.dropdown-content a {
+.dropdown-content a, .dropdown-content button {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -146,6 +150,8 @@ body {
 .logo-intro {
   max-height: 100%;
   max-width: 100%;
+  height: 500px;
+  weight: 500px;
   align: left;
 }
 
@@ -176,18 +182,23 @@ body {
   width: 99.9%;
 }
 
-.grid-parent {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(200px, 1fr));
-	grid-gap: 50px;
-}
-
 /*restaurants - ko iz baze spremeni, da bo modularno*/
 .box {
   flex: 1;
-  background-color: red;
-  padding: 200px;
-  width: 20%;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.box img {
+  align-self: center;
+  max-height: 100%;
+  max-width: 100%;
+  width: 400px;
+  height: 400px;
+}
+
+.shopname {
+  text-align: center;
 }
 
 /* Style the footer */
@@ -211,7 +222,8 @@ footer {
 }
 
 .box-moto-label {
-  background-color: gray;
+  background-color: lightgray;
+  padding-left: 10px;
   margin-top: 5px;
   font-size: 30px;
 }
@@ -483,9 +495,9 @@ footer {
 
 .obox {
   flex: 1;
-  background-color: red;
+  background-color: lightgray;
   padding: 20px;
-  min-width: 30%;
+  width: 20%;
   margin: 20px;
 }
 
@@ -513,6 +525,7 @@ footer {
   border: none;
   cursor: pointer;
   width: 100%;
+  float: right;
 }
 
 .loginbtn:hover {
@@ -534,7 +547,7 @@ footer {
 }
 
 img.avatar {
-  width: 40%;
+  width: 20%;
   border-radius: 50%;
 }
 

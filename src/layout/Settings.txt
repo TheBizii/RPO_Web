@@ -1,0 +1,4 @@
+user info - name, phone number, email, geslo
+paying options
+location
+profile mode - trgovina/kupec/dostavljalec
