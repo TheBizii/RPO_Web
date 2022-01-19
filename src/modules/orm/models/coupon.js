@@ -8,6 +8,8 @@ const Model = model.Model
 class Coupon extends Model {
   constructor () {
     super()
+
+	this.orders = [];
   }
 
   setTitle (title) {
@@ -117,7 +119,7 @@ class Coupon extends Model {
       const res = await db.query(sql)
       this.setID(res.insertId)
 
-      for (let i = 0; i < this.getRoles().length; i++) {
+      for (let i = 0; i < this.getOrders().length; i++) {
         const ordersql = `INSERT INTO used_coupons (coupon_id, order_id, active) VALUES (${this.getID()}, ${this.getOrders()[i]}, 1);`
         await db.query(ordersql)
       }

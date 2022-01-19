@@ -7,6 +7,8 @@ const Model = model.Model
 class Order extends Model {
   constructor () {
     super()
+
+	this.coupons = [];
   }
 
   setDate (date) {

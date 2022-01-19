@@ -176,6 +176,12 @@ body {
   width: 99.9%;
 }
 
+.grid-parent {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(200px, 1fr));
+	grid-gap: 50px;
+}
+
 /*restaurants - ko iz baze spremeni, da bo modularno*/
 .box {
   flex: 1;
@@ -479,7 +485,7 @@ footer {
   flex: 1;
   background-color: red;
   padding: 20px;
-  width: 20%;
+  min-width: 30%;
   margin: 20px;
 }
 
