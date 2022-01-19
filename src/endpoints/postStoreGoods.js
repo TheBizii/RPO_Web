@@ -12,7 +12,7 @@ router.post('/storeGoods', async function (req, res) {
 	let store = new PartnerLocation();
     await store.read(req.body.storeId)
 	const unfilteredGoods = await Goods.readAll();
-	const filteredGoods = unfilteredGoods.filter(goods => store.getGoods.includes(goods.getID()))
+	const filteredGoods = unfilteredGoods.filter(goods => store.getGoods().includes(goods.getID()))
 	res.json({
 		goods: filteredGoods
   	})
