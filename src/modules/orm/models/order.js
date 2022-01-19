@@ -7,6 +7,7 @@ const Model = model.Model
 class Order extends Model {
   constructor () {
     super()
+    this.orders = []
   }
 
   setDate (date) {
@@ -91,7 +92,7 @@ class Order extends Model {
       const sql = `INSERT INTO \`order\` (date, customer_id, total_value, total_discount_percentage, value_with_discount, active) VALUES ("${this.getDate()}", "${this.getCustomer().getID()}", "${this.getTotalValue()}", "${this.getTotalDiscountPercentage()}", "${this.getValueWithDiscount()}", 1);`
       const res = await db.query(sql)
       this.setID(res.insertId)
-      
+
       for (let i = 0; i < this.getCoupons().length; i++) {
         const couponsql = `INSERT INTO used_coupons (order_id, coupon_id, active) VALUES (${this.getID()}, ${this.getCoupons()[i]}, 1);`
         await db.query(couponsql)
