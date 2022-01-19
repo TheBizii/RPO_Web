@@ -244,6 +244,7 @@ CREATE TABLE `partner`
  `company_name`      varchar(45) NOT NULL ,
  `office_address_id` integer NOT NULL ,
  `iban`              varchar(40) NOT NULL ,
+ `image`			 varchar(512) ,
  `ID`                integer NOT NULL AUTO_INCREMENT ,
  `active`     tinyint NOT NULL ,
 
@@ -503,14 +504,14 @@ VALUES
 	(9, 2, 2.2, 2.2, 1, 1);
 
 INSERT INTO
-	partner (company_name, office_address_id, iban, active)
+	partner (company_name, office_address_id, iban, image, active)
 VALUES
-	('ALPE-PANON d.o.o.', 9, 'SI56031001003426009', 1),
-	('Patrick\'s Pub', 10, 'SI56031001003426010', 1),
-	('Kitajska Restavracija Zvezda', 11, 'SI56031001003426011', 1),
-	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 1),
-	('JEJ, storitve, d.o.o.', 18, 'SI56610000018118880', 1),
-	('PALTA d.o.o.', 20, 'SI56031601001033086', 1);
+	('ALPE-PANON d.o.o.', 9, 'SI56031001003426009', 'https://www.mcdonalds.com/content/dam/usa/nfl/assets/nav/arches-logo_108x108.jpg', 1),
+	('Patrick\'s Pub', 10, 'SI56031001003426010', 'http://patricks-pub.si/wp-content/uploads/2017/05/logo.png', 1),
+	('Kitajska Restavracija Zvezda', 11, 'SI56031001003426011', 'https://cdn.christmaslightsetc.com/images/ProductCloseup/58061/Star-Swirl-Etching-Green-78291-6346.jpg', 1),
+	('Kitajska Restavracija Zlata Srna', 12, 'SI56031001003426012', 'https://www.slo-foto.net/modules/Galerija/data/media/6/5240787151.jpg', 1),
+	('JEJ, storitve, d.o.o.', 18, 'SI56610000018118880', 'https://sloveniandinnerexperience.com/wp-content/uploads/sde_logo_color.png', 1),
+	('PALTA d.o.o.', 20, 'SI56031601001033086', 'https://images.squarespace-cdn.com/content/v1/5784f5403e00be6243effe21/1527843412143-XXEEWG5M7WAEUFHDJ0NP/logo-web.png?format=1500w', 1);
 
 INSERT INTO
 	partner_location (address_id, partner_id, title, active)
