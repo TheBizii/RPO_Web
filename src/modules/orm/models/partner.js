@@ -25,6 +25,10 @@ class Partner extends Model {
     this.iban = iban;
   }
 
+  setImage(image) {
+	  this.image = image;
+  }
+
   getCompanyName() {
     return this.companyName;
   }
@@ -37,10 +41,14 @@ class Partner extends Model {
     return this.IBAN;
   }
 
+  getImage() {
+	  return this.image;
+  }
+
   async create() {
     try {
       this.setActive(true);
-      let sql = `INSERT INTO partner (company_name, office_address_id, iban, active) VALUES ("${ this.getCompanyName() }", "${ this.getOfficeAddress().getID() }", "${ this.getIBAN() }", 1);`;
+      let sql = `INSERT INTO partner (company_name, office_address_id, iban, image, active) VALUES ("${ this.getCompanyName() }", "${ this.getOfficeAddress().getID() }", "${ this.getIBAN() }", "${ this.getImage() }", 1);`;
       let res = await db.query(sql);
       this.setID(res.insertId);
       return res;
@@ -62,6 +70,7 @@ class Partner extends Model {
         this.setCompanyName(partner.company_name);
         this.setOfficeAddress(address);
         this.setIBAN(partner.iban);
+		this.setImage(partner.image);
         this.setActive(partner.active);
         return this;
       }
@@ -92,7 +101,7 @@ class Partner extends Model {
 
   async update() {
     try {
-      let sql = `UPDATE partner SET company_name="${ this.getCompanyName() }", office_address_id="${ this.getOfficeAddress().getID() }", iban="${ this.getIBAN() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
+      let sql = `UPDATE partner SET company_name="${ this.getCompanyName() }", office_address_id="${ this.getOfficeAddress().getID() }", iban="${ this.getIBAN() }", image="${ this.getImage() }", active="${ this.getActive() }" WHERE ID=${ this.getID() };`;
       let res = await db.query(sql);
       return JSON.stringify(res);
     } catch(err) {
