@@ -8,7 +8,7 @@ $(document).ready( function() {
     document.getElementById("storename").innerHTML = name;
     document.getElementById("storelogo").src = shops[id].image;
   }
-  else if (window.location.href == "http://localhost/RPO_Web/index.html" || window.location.href == "https://bolt.printeepro.com/") {
+  else if (window.location.href == "http://localhost/RPO_Web/index.html" || window.location.href == "https://bolt.printeepro.com/index.html") {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getlocation);
     } else {
